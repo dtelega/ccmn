@@ -36,3 +36,6 @@ request.onload = function () {
 
 request.send();
 
+
+
+// need to create few function for different request
