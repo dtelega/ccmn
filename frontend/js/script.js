@@ -2,15 +2,15 @@ var request = new XMLHttpRequest();
 
 // Credentials
 var username = "RO";
-var password = "Passw0rd";
-//var password = "just4reading";
+//var password = "Passw0rd";   // cisco-presence
+var password = "just4reading"; // cisco-cmx
 
 
 // url
 var urlImageVersion = 'https://cisco-presence.unit.ua/api/config/v1/version/image';
 var urlAllUser = 'https://cisco-presence.unit.ua/api/config/v1/aaa/users';
 
-var url = 'https://cisco-presence.unit.ua/api/config/v1/alerts/count';
+var url = 'https://cisco-cmx.unit.ua/api/location/v2/clients/count';
 
 
 //request.withCredentials = {login:username, password:password};
@@ -24,7 +24,7 @@ request.onload = function () {
     var data = JSON.parse(this.response);
 
     if (request.status >= 200 && request.status < 400) {
-        console.log(data.count);
+        console.log("active user count = "+data.count);
     } else {
         console.log('error');
     }
