@@ -5,6 +5,7 @@ var username = "RO";
 //var password = "Passw0rd";   // cisco-presence
 var password = "just4reading"; // cisco-cmx
 
+var activeUserCount;
 
 // url
 var urlImageVersion = 'https://cisco-presence.unit.ua/api/config/v1/version/image';
@@ -25,6 +26,9 @@ request.onload = function () {
 
     if (request.status >= 200 && request.status < 400) {
         console.log("active user count = "+data.count);
+        activeUserCount = data.count;
+        $("#active-user-count").replaceWith(activeUserCount);
+
     } else {
         console.log('error');
     }
