@@ -16,26 +16,39 @@ var url = 'https://cisco-cmx.unit.ua/api/location/v2/clients/count';
 
 //request.withCredentials = {login:username, password:password};
 //request.open('GET', urlImageVersion, true, username, password);
-request.open('GET', url, true);
-request.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
 
-request.onload = function () {
 
-    // Begin accessing JSON data here
-    var data = JSON.parse(this.response);
+function getData(value, url, key, path) {
 
-    if (request.status >= 200 && request.status < 400) {
-        console.log("active user count = "+data.count);
-        activeUserCount = data.count;
-        $("#active-user-count").replaceWith(activeUserCount);
 
-    } else {
-        console.log('error');
+
+    request.open('GET', url, true);
+    request.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+
+
+
+    request.onload = function () {
+
+        // Begin accessing JSON data here
+        var data = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+            console.log(data[key]);
+            value = data[key];
+            $(path).replaceWith(value);
+
+        } else {
+            console.log('error');
+        }
     }
+
+    request.send();
+    return value;
 }
-
-request.send();
-
+var value = 0;
 
 
+
+console.log('return :'+getData(value, url, 'count', "#active-user-count"));
+
+console.log(value);
 // need to create few function for different request

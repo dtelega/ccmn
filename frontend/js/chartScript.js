@@ -11,21 +11,19 @@ function drawChart() {
 
     // Create the data table.
     var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Topping');
-    data.addColumn('number', 'Slices');
+    data.addColumn('string', 'Floor');
+    data.addColumn('number', 'UserCount');
     data.addRows([
-        ['Mushrooms', 3],
-        ['Onions', 1],
-        ['Olives', 1],
-        ['Zucchini', 1],
-        ['Pepperoni', 2]
+        ['1st Floor', 3],
+        ['2st Floor', 1],
+        ['3st Floor', 1]
     ]);
 
     // Set chart options
     var options = {
-        'title': 'How Much Pizza I Ate Last Night',
-        'width': 400,
-        'height': 300
+        'title': 'Active user count',
+        'width': 600,
+        'height': 350
     };
 
     // Instantiate and draw our chart, passing in some options.
