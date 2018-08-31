@@ -14,7 +14,7 @@ function drawChart() {
     data.addColumn('string', 'Floor');
     data.addColumn('number', 'UserCount');
     data.addRows([
-        ['1st Floor', 3],
+        ['1st Floor', getData(url, 'count')],
         ['2st Floor', 1],
         ['3st Floor', 1]
     ]);
