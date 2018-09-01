@@ -1,67 +1,121 @@
 
+// Load the Visualization API and the corechart package.
+
+google.charts.load('current', {'packages':['corechart']});
+
+// Set a callback to run when the Google Visualization API is loaded.
+
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawChartTotalUsers(data) {
+    console.log(data);
+    // Create the data table.
+    var chartData = new google.visualization.DataTable();
+    chartData.addColumn('string', 'Floor');
+    chartData.addColumn('number', 'UserCount');
+    $(data.data).each(
+        function (idx, floorInfo) {
+            if (floorInfo.floorName.indexOf('Floor') !== - 1) {
+                //console.log(floorInfo);
+                chartData.addRow([floorInfo.floorName, floorInfo.value]);
+            }
+        }
+    );
+
+    // Set chart options
+    var options = {
+        'title': 'Total active user count = '+ data.total.total,
+        'width': 1200,
+        'height': 700
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+    chart.draw(chartData, options);
+}
+
 
 // Credentials
-var username = "RO";
-//var password = "Passw0rd";   // cisco-presence
-var password = "just4reading"; // cisco-cmx
+function getLogin() {
+    username = $('#login').val();
+    console.log('Username '+username);
+}
+function getPassword() {
+    password = $('#password').val();
+    console.log('Password: '+password);
+}
 
+// delete this credentials
+username = 'RO';
+password = 'just4reading';
+// ***********************
 
 // url
 var urlImageVersion = 'https://cisco-presence.unit.ua/api/config/v1/version/image';
 var urlAllUser = 'https://cisco-presence.unit.ua/api/config/v1/aaa/users';
 
-var url = 'https://cisco-cmx.unit.ua/api/location/v2/clients/count';
+var floorUrl = 'https://cisco-cmx.unit.ua/api/analytics/v1/now/clientCount';
+var imageUrl = 'https://cisco-cmx.unit.ua/api/config/v1/maps/count';
+var visitorsYesterdayUrl = 'https://cisco-cmx.unit.ua/api/presence/v1/connected/count/yesterday';
 
+var imageUrl = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor';
+//function startSendRequests() {
 
-var path = '#active-user-count'+' > p';
-console.log('return :'+ getData(url, 'count'));
-$('#active-user-count').replaceWith("<p>" + getData(url, 'count') + '</p>');
-
-
-function getData(url, key) {
-
-   // var queryString = "user_name=RO&password=just4reading";
-
-
-    /*var request = new XMLHttpRequest();
-    request.open('GET', url, true);
-    request.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
-    request.onload = function () {
-
-        // Begin accessing JSON data here
-        var data = JSON.parse(request.response);
-        if (request.status >= 200 && request.status < 400) {
-            console.log('data[key] : ' + data[key] + ' to ' + path);
-            //$(path).replaceWith("<p>" + data[key] + '</p>');
-            $(path).append("<p>" + data[key] + '</p>');
-
-        } else {
-            console.log('error');
+    sendRequest(
+        floorUrl,
+        'GET',
+        null,
+        function (data) {
+            google.charts.setOnLoadCallback(function () {
+                drawChartTotalUsers(data)
+            });
         }
-    }
-    request.send();
+    );
 
-    return $(path).html();*/
-var val = 0;
+    sendRequest(
+        imageUrl,
+        'GET',
+        {
+         campusName: 'System Campus',
+         buildingName: 'UNIT.Factory',
+         floorName: '1st_Floor'
+        },
+        function (data) {
+            console.log(data);
+            //console.log(data);
+            //$("#my_image").attr("src","https://cisco-cmx.unit.ua/api/config/v1/maps/imagesource/domain_4_1511041548007.png");
+        }
+
+    );
+
+
+
+//}
+
+
+// sendRequest(
+//     countUrl,
+//     'GET',
+//     null,
+//     function (data) {
+//         google.charts.setOnLoadCallback(function() {drawChart(data.count)});
+//     }
+// );
+
+function sendRequest(url, type, payload, success) {
     $.ajax({
-        type:"GET",
+        type:type,
         url:url,
         dataType: 'json',
-        data:key,
-        async:false,
+        data:payload,
         headers: {
             "Authorization": "Basic " + btoa(username + ":" + password)
         },
-        success: function (data) {
-            console.log('get data for key ['+key+'] - '+data.count);
-            val = data.count;
-        }
+        success: success
     });
-    return val;
 }
 
 
 
 
-
-// need to create few function for different request

@@ -45,27 +45,28 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <input id="login" class="form-control mr-sm-2 credentials" type="text" placeholder="Login" onfocusout="getLogin();startSendRequests();">
+            <input id="password" class="form-control mr-sm-2 credentials" type="password" placeholder="Password" onfocusout="getPassword();startSendRequests();">
+            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
         </form>
     </div>
 </nav>
 
 
 
+
+
 <div class="content">
     <!--Div that will hold the pie chart-->
     <div id="chart_div"></div>
-    <div>
-        <div>Active user count: </div>
-        <div id="active-user-count"><p>text</p></div>
-    </div>
 
 
+    <form class="form-inline my-3 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="MAC address, xlogin">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
 
-
-
-    <!--<div id="value" style=""><p>0</p></div>-->
+    <img id='my_image' src="#" alt="">
 </div>
 
 
