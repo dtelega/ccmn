@@ -73,22 +73,16 @@ var imageUrl = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Camp
         }
     );
 
-    sendRequest(
-        imageUrl,
-        'GET',
-        {
-         campusName: 'System Campus',
-         buildingName: 'UNIT.Factory',
-         floorName: '1st_Floor'
-        },
-        function (data) {
-            console.log(data);
-            //console.log(data);
-            //$("#my_image").attr("src","https://cisco-cmx.unit.ua/api/config/v1/maps/imagesource/domain_4_1511041548007.png");
-        }
+sendRequest(
+    imageUrl,
+    'GET',
+    null,
+    function (data) {
+        console.log("success download floor image");
+        $('.img_floor').html('<img src="data:image/png;base64,'+data+'" />');
 
-    );
-
+    }
+);
 
 
 //}
@@ -107,13 +101,22 @@ function sendRequest(url, type, payload, success) {
     $.ajax({
         type:type,
         url:url,
-        dataType: 'json',
+        // dataType: 'json',
+        contentType: "image/png",
         data:payload,
         headers: {
             "Authorization": "Basic " + btoa(username + ":" + password)
         },
-        success: success
+        success: success,
+        error: function(url){
+            console.log('error ajax request!');
+        }
     });
+
+
+
+
+
 }
 
 
