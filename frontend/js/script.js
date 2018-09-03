@@ -79,7 +79,7 @@ sendRequest(
     null,
     function (data) {
         console.log("success download floor image");
-        $('.img_floor').html('<img src="data:image/png;base64,'+data+'" />');
+        $('.img_floor').html('<img src="data:image/png;base64,' + data + '" />');
 
     }
 );
