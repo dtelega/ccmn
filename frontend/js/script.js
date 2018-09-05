@@ -79,23 +79,19 @@ sendRequest(
     null,
     function (data) {
         console.log("success download floor image");
-        $('.img_floor').html('<img src="data:image/png;base64,' + data + '" />');
+        console.log((data));
+        // $('.img_floor').html('<img src="data:image/png;base64,' + data + '" />');
 
     }
 );
 
+$('#btn').on('click', function(){
+   // some gryaz'
+});
+
 
 //}
 
-
-// sendRequest(
-//     countUrl,
-//     'GET',
-//     null,
-//     function (data) {
-//         google.charts.setOnLoadCallback(function() {drawChart(data.count)});
-//     }
-// );
 
 function sendRequest(url, type, payload, success) {
     $.ajax({
