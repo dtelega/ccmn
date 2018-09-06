@@ -56,10 +56,11 @@ var urlImageVersion = 'https://cisco-presence.unit.ua/api/config/v1/version/imag
 var urlAllUser = 'https://cisco-presence.unit.ua/api/config/v1/aaa/users';
 
 var floorUrl = 'https://cisco-cmx.unit.ua/api/analytics/v1/now/clientCount';
-var imageUrl = 'https://cisco-cmx.unit.ua/api/config/v1/maps/count';
 var visitorsYesterdayUrl = 'https://cisco-cmx.unit.ua/api/presence/v1/connected/count/yesterday';
 
-var imageUrl = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor';
+var imageUrl1 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor';
+var imageUrl2 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/2nd_Floor';
+var imageUrl3 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/3rd_Floor';
 //function startSendRequests() {
 
     sendRequest(
@@ -74,16 +75,56 @@ var imageUrl = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Camp
     );
 
 sendRequest(
-    imageUrl,
+    imageUrl1,
     'GET',
     null,
     function (data) {
         console.log("success download floor image");
-        console.log((data));
-        // $('.img_floor').html('<img src="data:image/png;base64,' + data + '" />');
-
+        $(".img_floor1").html('<img src="' + imageUrl1 + '" />');
     }
 );
+sendRequest(
+    imageUrl2,
+    'GET',
+    null,
+    function (data) {
+        console.log("success download floor image");
+        $(".img_floor2").html('<img src="' + imageUrl2 + '" />');
+    }
+);
+sendRequest(
+    imageUrl3,
+    'GET',
+    null,
+    function (data) {
+        console.log("success download floor image");
+        $(".img_floor3").html('<img src="' + imageUrl3 + '" />');
+    }
+);
+
+
+function blobToFile(theBlob, fileName){
+    //A Blob() is almost a File() - it just missing the two properties below which we will add
+    theBlob.lastModifiedDate = new Date();
+    theBlob.name = fileName;
+    return theBlob;
+}
+
+
+/*
+ *      File to base64
+ * */
+
+function getBase64(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+        console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };
+}
 
 $('#btn').on('click', function(){
    // some gryaz'
