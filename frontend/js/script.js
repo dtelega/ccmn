@@ -52,14 +52,14 @@ password = 'just4reading';
 // ***********************
 
 // url
-var urlImageVersion = 'https://cisco-presence.unit.ua/api/config/v1/version/image';
-var urlAllUser = 'https://cisco-presence.unit.ua/api/config/v1/aaa/users';
 
-var floorUrl = 'https://cisco-cmx.unit.ua/api/analytics/v1/now/clientCount';
+const floorUrl = 'https://cisco-cmx.unit.ua/api/analytics/v1/now/clientCount';
 
-var imageUrl1 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor';
-var imageUrl2 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/2nd_Floor';
-var imageUrl3 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/3rd_Floor';
+const imageUrl1 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor';
+const imageUrl2 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/2nd_Floor';
+const imageUrl3 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/3rd_Floor';
+
+const coordMacUrl = 'https://cisco-cmx.unit.ua/api/location/v2/clients?macAddress=';
 //function startSendRequests() {
 
     sendRequest(
@@ -148,7 +148,7 @@ function sendRequest(url, type, payload, success) {
         type:type,
         url:url,
         // dataType: 'json',
-        contentType: "image/png",
+        // contentType: "image/png",
         data:payload,
         headers: {
             "Authorization": "Basic " + btoa(username + ":" + password)
