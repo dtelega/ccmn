@@ -22,9 +22,9 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" id="floor_btn">
             <li class="nav-item">
-                <a class="nav-link" href="#">Active user count</a>
+                <a id="active_user_count_btn" class="nav-link" href="#">Active user count</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,18 +67,20 @@
 
 
 <div class="content">
-    <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
+
+    <section id="active_user_count"><div id="chart_div"></div></section>
 
 
-    <form class="form-inline my-3 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="MAC address, xlogin">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <section id="floor_map">
+        <form class="form-inline my-3 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="MAC address, xlogin">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
 
-    <div class='floor-image img_floor1'></div>
-    <div class='floor-image img_floor2'></div>
-    <div class='floor-image img_floor3'></div>
+        <div class='floor-image img_floor1'></div>
+        <div class='floor-image img_floor2'></div>
+        <div class='floor-image img_floor3'></div>
+    </section>
 
 </div>
 
