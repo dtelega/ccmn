@@ -62,70 +62,7 @@ const imageUrl3 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20C
 const coordMacUrl = 'https://cisco-cmx.unit.ua/api/location/v2/clients?macAddress=';
 //function startSendRequests() {
 
-    sendRequest(
-        floorUrl,
-        'GET',
-        null,
-        function (data) {
-            google.charts.setOnLoadCallback(function () {
-                drawChartTotalUsers(data)
-            });
-        }
-    );
 
-$('#1st_Floor_btn').on('click', function(){
-    sendRequest(
-        imageUrl1,
-        'GET',
-        null,
-        function () {
-            console.log("success download floor image");
-            $(".img_floor1").html('<img  width="100%" src="' + imageUrl1 + '" />');
-        }
-    );
-    $(".img_floor1").show();
-    $(".img_floor2").hide();
-    $(".img_floor3").hide();
-
-
-    $("#active_user_count").hide();
-    $("#floor_map").show();
-
-});
-$('#2nd_Floor_btn').on('click', function() {
-    sendRequest(
-        imageUrl2,
-        'GET',
-        null,
-        function () {
-            console.log("success download floor image");
-            $(".img_floor2").html('<img  width="100%" src="' + imageUrl2 + '" />');
-        }
-    );
-    $(".img_floor1").hide();
-    $(".img_floor2").show();
-    $(".img_floor3").hide();
-
-    $("#active_user_count").hide();
-    $("#floor_map").show();
-});
-$('#3rd_Floor_btn').on('click', function() {
-    sendRequest(
-        imageUrl3,
-        'GET',
-        null,
-        function () {
-            console.log("success download floor image");
-            $(".img_floor3").html('<img width="100%" src="' + imageUrl3 + '" />');
-        }
-    );
-    $(".img_floor1").hide();
-    $(".img_floor2").hide();
-    $(".img_floor3").show();
-
-    $("#active_user_count").hide();
-    $("#floor_map").show();
-});
 
 $('#active_user_count_btn').on('click', function () {
     $("#active_user_count").show();
@@ -141,6 +78,17 @@ $('#active_user_count_btn').on('click', function () {
 //}
 
 
+$.ajax({
+    url : imageUrl1,
+    cache: true,
+    processData : false,
+    beforeSend : function(xhr) {
+        xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+    },
+}).always(function(){
+    $(".img_floor1").attr("src", imageUrl1).fadeIn();
+});
+
 
 
 function sendRequest(url, type, payload, success) {
@@ -154,7 +102,7 @@ function sendRequest(url, type, payload, success) {
             "Authorization": "Basic " + btoa(username + ":" + password)
         },
         success: success,
-        error: function(url){
+        error: function(){
             console.log('error ajax request!');
         }
     });
