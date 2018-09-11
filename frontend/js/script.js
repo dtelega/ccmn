@@ -35,20 +35,29 @@ function drawChartTotalUsers(data) {
     chart.draw(chartData, options);
 }
 
-
+//
+var siteId; // 1513804707441
+var username;
+var password;
+var password2;
 // Credentials
 function getLogin() {
     username = $('#login').val();
     console.log('Username '+username);
 }
-function getPassword() {
-    password = $('#password').val();
+function getPasswordCmx() {
+    password = $('#password-cmx').val();
+    console.log('Password: '+password);
+}
+function getPasswordPrecense() {
+    password2 = $('#password-precense').val();
     console.log('Password: '+password);
 }
 
 // delete this credentials
 username = 'RO';
 password = 'just4reading';
+password2 = 'Passw0rd';
 // ***********************
 
 // url
@@ -60,8 +69,28 @@ const imageUrl2 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20C
 const imageUrl3 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/3rd_Floor';
 
 const coordMacUrl = 'https://cisco-cmx.unit.ua/api/location/v2/clients?macAddress=';
-//function startSendRequests() {
 
+const siteInfoUrl = 'https://cisco-presence.unit.ua/api/config/v1/sites';
+
+
+
+function getOneValueVisitorsInfo() {
+    var requestUrl = "https://cisco-presence.unit.ua/api/presence/v1/connected/"+document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '')+"?siteId="+siteid;
+    // requestUrl += document.getElementById("oneValueVisitors").value;
+    // requestUrl += "?siteId="+siteid;
+    console.log(requestUrl);
+
+
+    sendRequest(
+        requestUrl,
+        password2,
+        'GET',
+        null,
+        function (data) {
+           $("#oneValueVisitorsInfo").html(data);
+        }
+    );
+}
 
 
 $('#active_user_count_btn').on('click', function () {
@@ -69,49 +98,6 @@ $('#active_user_count_btn').on('click', function () {
     $("#floor_map").hide();
 });
 
-
-// $('#1st_Floor_btn').on('click'), function () {
-//     $("#active_user_count").hide();
-//     $("#floor_map").show();
-// }
-
-//}
-
-
-$.ajax({
-    url : imageUrl1,
-    cache: true,
-    processData : false,
-    beforeSend : function(xhr) {
-        xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
-    },
-}).always(function(){
-    $(".img_floor1").attr("src", imageUrl1).fadeIn();
-});
-
-
-
-function sendRequest(url, type, payload, success) {
-    $.ajax({
-        type:type,
-        url:url,
-        // dataType: 'json',
-        // contentType: "image/png",
-        data:payload,
-        headers: {
-            "Authorization": "Basic " + btoa(username + ":" + password)
-        },
-        success: success,
-        error: function(){
-            console.log('error ajax request!');
-        }
-    });
-
-
-
-
-
-}
 
 
 

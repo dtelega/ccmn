@@ -56,7 +56,8 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input id="login" class="form-control mr-sm-2 credentials" type="text" placeholder="Login" onfocusout="getLogin();startSendRequests();">
-            <input id="password" class="form-control mr-sm-2 credentials" type="password" placeholder="Password" onfocusout="getPassword();startSendRequests();">
+            <input id="password-cmx" class="form-control mr-sm-2 credentials" type="password" placeholder="Password cmx" onfocusout="getPasswordCmx();startSendRequests();">
+            <input id="password-precense" class="form-control mr-sm-2 credentials" type="password" placeholder="Password presence" onfocusout="getPasswordPrecense();startSendRequests();">
             <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
         </form>
     </div>
@@ -80,6 +81,24 @@
         <div class='floor-image img_floor1'></div>
         <div class='floor-image img_floor2'></div>
         <div class='floor-image img_floor3'></div>
+    </section>
+
+    <section id="presence">
+
+        Get Connected Visitors Info about:
+        <select id="oneValueVisitors">
+
+            <option selected value=”count/today”>Count of connected visitors seen today until now</option>
+            <option value=”count/yesterday”>Count of connected visitors seen yesterday</option>
+            <option value=”count/3days”>Average count of connected visitors seen in last 3 days</option>
+            <option value="count/lastweek">Average count of connected visitors seen in last 7 days</option>
+            <option value="count/lastmonth">Average count of connected visitors seen in last 30 days</option>
+            <option value="total/3days">Sum of connected visitor counts seen in last 3 days</option>
+            <option value="total/lastweek">Sum of connected visitor counts seen in last 7 days</option>
+            <option value="total/lastmonth">Sum of connected visitor counts seen in last 30 days</option>
+        </select>
+        <button onclick="getOneValueVisitorsInfo();">Get this</button>
+        <p id="oneValueVisitorsInfo"></p>
     </section>
 
 </div>
