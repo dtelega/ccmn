@@ -1,17 +1,4 @@
 // function startSendRequests() {
-
-    sendRequest(
-        floorUrl,
-        password,
-        'GET',
-        null,
-        function (data) {
-            google.charts.setOnLoadCallback(function () {
-                drawChartTotalUsers(data)
-            });
-        }
-    );
-
     sendRequest(
         siteInfoUrl,
         password2,
@@ -22,6 +9,31 @@
             console.log("get siteId " + siteid);
         }
     );
+    sendRequest(
+        floorUrl,
+        password,
+        'GET',
+        null,
+        function (data) {
+            google.charts.setOnLoadCallback(function () {
+                drawChartTotalUsers(data);
+            });
+        }
+    );
+    sendRequest(
+        hourlyCountUrl+1513804707441,
+        password2,
+        'GET',
+        null,
+        function (data) {
+
+            google.charts.setOnLoadCallback(function () {
+                drawHourlyGraph(data);
+            });
+        }
+    );
+
+
 
 
     $('#1st_Floor_btn').on('click', function () {

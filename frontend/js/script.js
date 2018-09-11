@@ -1,7 +1,8 @@
 
+
 // Load the Visualization API and the corechart package.
 
-google.charts.load('current', {'packages':['corechart']});
+google.charts.load('current', {'packages':['corechart', 'bar']});
 
 // Set a callback to run when the Google Visualization API is loaded.
 
@@ -35,6 +36,42 @@ function drawChartTotalUsers(data) {
     chart.draw(chartData, options);
 }
 
+function drawHourlyGraph(data) {
+    console.log(data);
+
+        var chartData = new google.visualization.DataTable();
+    chartData.addColumn('timeofday', 'Time of Day');
+    chartData.addColumn('number', 'Count of connected visitors');
+
+    for (var i = 0; i < 25; i++) {
+        chartData.addRow(
+            [{v: [i, 0, 0], f: i+""}, data[i]]
+        );
+    }
+
+
+    var options = {
+        title: 'Title',
+        isStacked: true,
+        hAxis: {
+            title: 'Time of Day',
+            format: 'h:mm a',
+            viewWindow: {
+                min: [0, 0, 0],
+                max: [24, 0, 0]
+            }
+        },
+        vAxis: {
+            title: 'Count of connected visitors',
+            'height': 700
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+    chart.draw(chartData, options);
+
+}
+
 //
 var siteId; // 1513804707441
 var username;
@@ -63,6 +100,7 @@ password2 = 'Passw0rd';
 // url
 
 const floorUrl = 'https://cisco-cmx.unit.ua/api/analytics/v1/now/clientCount';
+const hourlyCountUrl = 'https://cisco-presence.unit.ua/api/presence/v1/connected/hourly/today?siteId=';
 
 const imageUrl1 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor';
 const imageUrl2 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/2nd_Floor';
