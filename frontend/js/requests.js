@@ -9,6 +9,8 @@
             console.log("get siteId " + siteid);
         }
     );
+function chartDrawFloor() {
+
 
     sendRequest(
         floorUrl,
@@ -21,6 +23,7 @@
             });
         }
     );
+}
 
 function chartDrawType() {
     var hourlyCountUrl = 'https://cisco-presence.unit.ua/api/presence/v1/connected/';
@@ -33,6 +36,7 @@ function chartDrawType() {
         null,
         function (data) {
 
+            console.log(data[0]);
             google.charts.setOnLoadCallback(function () {
                 drawHourlyGraph(data);
             });
@@ -40,7 +44,13 @@ function chartDrawType() {
     );
 }
 
+    $('#active_user_count_btn').on('click', function () {
 
+        $("#active_user_count").show();
+        $("#floor_map").hide();
+        $("#presence").hide();
+
+    });
 
     $('#1st_Floor_btn').on('click', function () {
 
@@ -61,6 +71,7 @@ function chartDrawType() {
 
         $("#active_user_count").hide();
         $("#floor_map").show();
+        $("#presence").hide();
 
     });
     $('#2nd_Floor_btn').on('click', function () {
@@ -80,6 +91,7 @@ function chartDrawType() {
 
         $("#active_user_count").hide();
         $("#floor_map").show();
+        $("#presence").hide();
     });
     $('#3rd_Floor_btn').on('click', function () {
         sendRequest(
@@ -98,7 +110,16 @@ function chartDrawType() {
 
         $("#active_user_count").hide();
         $("#floor_map").show();
+        $("#presence").hide();
     });
+
+    $('#presence_btn').on('click', function () {
+        $("#active_user_count").hide();
+        $("#floor_map").hide();
+        $("#presence").show();
+        console.log("show");
+    });
+
 
 // }
 function sendRequest(url, pass, type, payload, success) {

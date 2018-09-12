@@ -24,7 +24,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto" id="floor_btn">
             <li class="nav-item">
-                <a id="active_user_count_btn" class="nav-link" href="#">Active user count</a>
+                <a id="active_user_count_btn" class="nav-link" href="#" onclick="chartDrawFloor()">Active user count</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -39,7 +39,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Analytics and Presence</a>
+                <a id="presence_btn" class="nav-link" href="#">Analytics and Presence</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Forecasting number of visitors</a>
@@ -83,11 +83,10 @@
         <div class='floor-image img_floor3'></div>
     </section>
 
-    <section id="presence">
+    <section id="presence" style="display: none;">
 
         Get Connected Visitors Info about:
         <select id="oneValueVisitors">
-
             <option selected value=”count/today”>Count of connected visitors seen today until now</option>
             <option value=”count/yesterday”>Count of connected visitors seen yesterday</option>
             <option value=”count/3days”>Average count of connected visitors seen in last 3 days</option>
@@ -99,18 +98,22 @@
         </select>
         <button onclick="getOneValueVisitorsInfo();">Get this</button>
         <p id="oneValueVisitorsInfo"></p>
+
+
+        <section id="dravHourly">
+            <select id="oneValueHourly">
+                <option selected value=”hourly/today”>Hourly count of connected visitors today</option>
+                <option value=”hourly/yesterday”>Hourly count of connected visitors yesterday</option>
+                <!--<option value=”hourly/3days”>Hourly count of connected visitors in last 3 days</option>-->
+
+            </select>
+            <button onclick="chartDrawType();">Get this</button>
+            <div id="chart_div2" style="height: 1000px"></div>
+        </section>
+
     </section>
 
-    <section id="dravHourly">
-        <select id="oneValueHourly">
-            <option selected value=”hourly/today”>Hourly count of connected visitors today</option>
-            <option value=”hourly/yesterday”>Hourly count of connected visitors yesterday</option>
-            <option value=”hourly/3days”>Hourly count of connected visitors in last 3 days</option>
 
-        </select>
-        <button onclick="chartDrawType();">Get this</button>
-        <div id="chart_div2"></div>
-    </section>
 
 </div>
 

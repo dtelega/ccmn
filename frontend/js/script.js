@@ -63,7 +63,8 @@ function drawHourlyGraph(data) {
         },
         vAxis: {
             title: 'Count of connected visitors',
-            'height': 700
+            'height': 700,
+            'width' : 3000
         }
     };
 
@@ -105,7 +106,6 @@ const imageUrl1 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20C
 const imageUrl2 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/2nd_Floor';
 const imageUrl3 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/3rd_Floor';
 
-const coordMacUrl = 'https://cisco-cmx.unit.ua/api/location/v2/clients?macAddress=';
 
 const siteInfoUrl = 'https://cisco-presence.unit.ua/api/config/v1/sites';
 
