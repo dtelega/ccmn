@@ -30,6 +30,10 @@ function chartDrawType() {
     var type = document.getElementById("oneValueHourly").value.replace('\”', '').replace('\”', '');
     hourlyCountUrl += type+"?siteId="+siteid;
 
+    if (type === "hourly") {
+        hourlyCountUrl += "&date=";
+        hourlyCountUrl += $("#dravHourlyDate").val();
+    }
 
     console.log(hourlyCountUrl);
     sendRequest(
@@ -38,8 +42,6 @@ function chartDrawType() {
         'GET',
         null,
         function (data) {
-
-            console.log(data[0]);
             google.charts.setOnLoadCallback(function () {
                 drawHourlyGraph(data, type);
             });
@@ -51,13 +53,11 @@ function getOneValueVisitorsInfo() {
     var requestUrl = "https://cisco-presence.unit.ua/api/presence/v1/connected/";
     var type = document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '');
 
-    requestUrl += type;
-    if (type === "count/today?date=") {
+    requestUrl += type + "?siteId="+siteid;
+    if (type === "count") {
+        requestUrl += "&date=";
         requestUrl += $("#oneValueDate").val();
-        requestUrl += "&siteId="+siteid;
     }
-    else
-        requestUrl += "?siteId="+siteid;
     if (type === "total") {
         requestUrl += "&startDate=";
         requestUrl += $("#oneValueStartDate").val();
@@ -65,9 +65,6 @@ function getOneValueVisitorsInfo() {
         requestUrl += $("#oneValueEndDate").val();
     }
 
-    // requestUrl += document.getElementById("oneValueVisitors").value;
-    // requestUrl += "?siteId="+siteid;
-    console.log(requestUrl);
 
 
     sendRequest(

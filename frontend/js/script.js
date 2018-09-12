@@ -45,6 +45,9 @@ function drawHourlyGraph(data, type) {
         chartData.addColumn('number', 'Today');
     else if (type === "hourly/yesterday")
         chartData.addColumn('number', 'Yesterday');
+    else if (type === "hourly") {
+        chartData.addColumn('number', $("#dravHourlyDate").val()+'');
+    }
     else if (type === "hourly/3days") { // TODO: make multichart great again
         chartData.addColumn('number', '1');
         chartData.addColumn('number', '2');
@@ -82,7 +85,7 @@ function drawHourlyGraph(data, type) {
 }
 
 //
-var siteId; // 1513804707441
+var siteid; // 1513804707441
 var username;
 var password;
 var password2;
@@ -130,10 +133,13 @@ $('#active_user_count_btn').on('click', function () {
 $("#oneValueVisitors").change(function () {
     var type = document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '');
 
-    if (type === "count/today?date=") {
+    if (type === "count") {
         $("#oneValueDate").show();
+        $("#oneValueStartDate").hide();
+        $("#oneValueEndDate").hide();
     }
     else if (type === "total") {
+        $("#oneValueDate").hide();
         $("#oneValueStartDate").show();
         $("#oneValueEndDate").show();
     }
@@ -141,6 +147,17 @@ $("#oneValueVisitors").change(function () {
         $("#oneValueDate").hide();
         $("#oneValueStartDate").hide();
         $("#oneValueEndDate").hide();
+    }
+});
+
+$("#oneValueHourly").change(function () {
+    var type = document.getElementById("oneValueHourly").value.replace('\”', '').replace('\”', '');
+
+    if (type === "hourly") {
+        $("#dravHourlyDate").show();
+    }
+    else {
+        $("#dravHourlyDate").hide();
     }
 });
 
