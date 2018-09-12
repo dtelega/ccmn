@@ -36,12 +36,20 @@ function drawChartTotalUsers(data) {
     chart.draw(chartData, options);
 }
 
-function drawHourlyGraph(data) {
+function drawHourlyGraph(data, type) {
     console.log(data);
 
         var chartData = new google.visualization.DataTable();
     chartData.addColumn('timeofday', 'Time of Day');
-    chartData.addColumn('number', 'Count of connected visitors');
+    if (type === "hourly/today")
+        chartData.addColumn('number', 'Today');
+    else if (type === "hourly/yesterday")
+        chartData.addColumn('number', 'Yesterday');
+    else if (type === "hourly/3days") { // TODO: make multichart great again
+        chartData.addColumn('number', '1');
+        chartData.addColumn('number', '2');
+        chartData.addColumn('number', '3');
+    }
 
     for (var i = 0; i < 25; i++) {
         chartData.addRow(
@@ -111,28 +119,29 @@ const siteInfoUrl = 'https://cisco-presence.unit.ua/api/config/v1/sites';
 
 
 
-function getOneValueVisitorsInfo() {
-    var requestUrl = "https://cisco-presence.unit.ua/api/presence/v1/connected/"+document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '')+"?siteId="+siteid;
-    // requestUrl += document.getElementById("oneValueVisitors").value;
-    // requestUrl += "?siteId="+siteid;
-    console.log(requestUrl);
 
-
-    sendRequest(
-        requestUrl,
-        password2,
-        'GET',
-        null,
-        function (data) {
-           $("#oneValueVisitorsInfo").html(data);
-        }
-    );
-}
 
 
 $('#active_user_count_btn').on('click', function () {
     $("#active_user_count").show();
     $("#floor_map").hide();
+});
+
+$("#oneValueVisitors").change(function () {
+    var type = document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '');
+
+    if (type === "count/today?date=") {
+        $("#oneValueDate").show();
+    }
+    else if (type === "total") {
+        $("#oneValueStartDate").show();
+        $("#oneValueEndDate").show();
+    }
+    else {
+        $("#oneValueDate").hide();
+        $("#oneValueStartDate").hide();
+        $("#oneValueEndDate").hide();
+    }
 });
 
 

@@ -27,7 +27,10 @@ function chartDrawFloor() {
 
 function chartDrawType() {
     var hourlyCountUrl = 'https://cisco-presence.unit.ua/api/presence/v1/connected/';
-    hourlyCountUrl += document.getElementById("oneValueHourly").value.replace('\”', '').replace('\”', '')+"?siteId="+siteid;
+    var type = document.getElementById("oneValueHourly").value.replace('\”', '').replace('\”', '');
+    hourlyCountUrl += type+"?siteId="+siteid;
+
+
     console.log(hourlyCountUrl);
     sendRequest(
         hourlyCountUrl,
@@ -38,8 +41,42 @@ function chartDrawType() {
 
             console.log(data[0]);
             google.charts.setOnLoadCallback(function () {
-                drawHourlyGraph(data);
+                drawHourlyGraph(data, type);
             });
+        }
+    );
+}
+
+function getOneValueVisitorsInfo() {
+    var requestUrl = "https://cisco-presence.unit.ua/api/presence/v1/connected/";
+    var type = document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '');
+
+    requestUrl += type;
+    if (type === "count/today?date=") {
+        requestUrl += $("#oneValueDate").val();
+        requestUrl += "&siteId="+siteid;
+    }
+    else
+        requestUrl += "?siteId="+siteid;
+    if (type === "total") {
+        requestUrl += "&startDate=";
+        requestUrl += $("#oneValueStartDate").val();
+        requestUrl += "&endDate=";
+        requestUrl += $("#oneValueEndDate").val();
+    }
+
+    // requestUrl += document.getElementById("oneValueVisitors").value;
+    // requestUrl += "?siteId="+siteid;
+    console.log(requestUrl);
+
+
+    sendRequest(
+        requestUrl,
+        password2,
+        'GET',
+        null,
+        function (data) {
+            $("#oneValueVisitorsInfo").html(data);
         }
     );
 }
@@ -117,7 +154,6 @@ function chartDrawType() {
         $("#active_user_count").hide();
         $("#floor_map").hide();
         $("#presence").show();
-        console.log("show");
     });
 
 

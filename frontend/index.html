@@ -87,6 +87,7 @@
 
         Get Connected Visitors Info about:
         <select id="oneValueVisitors">
+            <option value=”count/today?date=”>Count of connected visitors for a date</option>
             <option selected value=”count/today”>Count of connected visitors seen today until now</option>
             <option value=”count/yesterday”>Count of connected visitors seen yesterday</option>
             <option value=”count/3days”>Average count of connected visitors seen in last 3 days</option>
@@ -95,7 +96,11 @@
             <option value="total/3days">Sum of connected visitor counts seen in last 3 days</option>
             <option value="total/lastweek">Sum of connected visitor counts seen in last 7 days</option>
             <option value="total/lastmonth">Sum of connected visitor counts seen in last 30 days</option>
+            <option value="total">Sum of connected visitor counts seen in the specified date range</option>
         </select>
+        <input id="oneValueDate" placeholder="date" style="display: none">
+        <input id="oneValueStartDate" placeholder="start date" style="display: none">
+        <input id="oneValueEndDate" placeholder="end date" style="display: none">
         <button onclick="getOneValueVisitorsInfo();">Get this</button>
         <p id="oneValueVisitorsInfo"></p>
 
