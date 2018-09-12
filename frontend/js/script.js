@@ -100,7 +100,6 @@ password2 = 'Passw0rd';
 // url
 
 const floorUrl = 'https://cisco-cmx.unit.ua/api/analytics/v1/now/clientCount';
-const hourlyCountUrl = 'https://cisco-presence.unit.ua/api/presence/v1/connected/hourly/today?siteId=';
 
 const imageUrl1 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor';
 const imageUrl2 = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/2nd_Floor';

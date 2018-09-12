@@ -101,7 +101,17 @@
         <p id="oneValueVisitorsInfo"></p>
     </section>
 
-    <div id="chart_div2"></div>
+    <section id="dravHourly">
+        <select id="oneValueHourly">
+            <option selected value=”hourly/today”>Hourly count of connected visitors today</option>
+            <option value=”hourly/yesterday”>Hourly count of connected visitors yesterday</option>
+            <option value=”hourly/3days”>Hourly count of connected visitors in last 3 days</option>
+
+        </select>
+        <button onclick="chartDrawType();">Get this</button>
+        <div id="chart_div2"></div>
+    </section>
+
 </div>
 
 

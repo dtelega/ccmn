@@ -9,6 +9,7 @@
             console.log("get siteId " + siteid);
         }
     );
+
     sendRequest(
         floorUrl,
         password,
@@ -20,8 +21,13 @@
             });
         }
     );
+
+function chartDrawType() {
+    var hourlyCountUrl = 'https://cisco-presence.unit.ua/api/presence/v1/connected/';
+    hourlyCountUrl += document.getElementById("oneValueHourly").value.replace('\”', '').replace('\”', '')+"?siteId="+siteid;
+    console.log(hourlyCountUrl);
     sendRequest(
-        hourlyCountUrl+1513804707441,
+        hourlyCountUrl,
         password2,
         'GET',
         null,
@@ -32,7 +38,7 @@
             });
         }
     );
-
+}
 
 
 
