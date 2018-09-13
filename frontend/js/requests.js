@@ -36,6 +36,7 @@ function chartDrawType() {
     }
 
     console.log(hourlyCountUrl);
+
     sendRequest(
         hourlyCountUrl,
         password2,
@@ -50,10 +51,12 @@ function chartDrawType() {
 }
 
 function getOneValueVisitorsInfo() {
-    var requestUrl = "https://cisco-presence.unit.ua/api/presence/v1/connected/";
+    var requestUrl = "https://cisco-presence.unit.ua/api/presence/v1/";
+    var apiType = $("#apiType").val();
     var type = document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '');
 
-    requestUrl += type + "?siteId="+siteid;
+
+    requestUrl += apiType + type + "?siteId="+siteid;
     if (type === "count") {
         requestUrl += "&date=";
         requestUrl += $("#oneValueDate").val();
@@ -65,6 +68,7 @@ function getOneValueVisitorsInfo() {
         requestUrl += $("#oneValueEndDate").val();
     }
 
+    console.log(requestUrl);
 
 
     sendRequest(
@@ -73,7 +77,15 @@ function getOneValueVisitorsInfo() {
         'GET',
         null,
         function (data) {
-            $("#oneValueVisitorsInfo").html(data);
+            if (apiType !== "repeatvisitors/")
+                $("#oneValueVisitorsInfo").html(data);
+            else {
+                $("#repeatVisitorsInfoDaily").html(data.DAILY);
+                $("#repeatVisitorsInfoWeekly").html(data.WEEKLY);
+                $("#repeatVisitorsInfoOccas").html(data.OCCASIONAL);
+                $("#repeatVisitorsInfoFirst").html(data.FIRST_TIME);
+                $("#repeatVisitorsInfoYesterday").html(data.YESTERDAY);
+            }
         }
     );
 }
@@ -94,5 +106,4 @@ function sendRequest(url, pass, type, payload, success) {
             console.log('error ajax request!');
         }
     });
-
 }

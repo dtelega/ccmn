@@ -1,7 +1,4 @@
 
-
-
-//
 var siteid; // 1513804707441
 var username;
 var password;
@@ -48,6 +45,8 @@ $('#active_user_count_btn').on('click', function () {
 $("#oneValueVisitors").change(function () {
     var type = document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '');
 
+    console.log(apiType);
+    console.log(type);
     if (type === "count") {
         $("#oneValueDate").show();
         $("#oneValueStartDate").hide();
@@ -63,6 +62,17 @@ $("#oneValueVisitors").change(function () {
         $("#oneValueStartDate").hide();
         $("#oneValueEndDate").hide();
     }
+
+});
+
+$("#apiType").change(function () {
+    var apiType = document.getElementById("apiType").value.replace('\”', '').replace('\”', '');
+
+    if (apiType === "repeatvisitors/") {
+        $("#repeatVisitorsInfo").show();
+    }
+    else
+        $("#repeatVisitorsInfo").hide();
 });
 
 $("#oneValueHourly").change(function () {
