@@ -1,5 +1,23 @@
+
+/*
+ *  URL for request
+ *
+ */
+
+// active user count
+const floorUrl = 'https://cisco-cmx.unit.ua/api/analytics/v1/now/clientCount';
+
+// for floor image download
+const imageUrl = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/';
+
+// for siteId
+const siteInfoUrl = 'https://cisco-presence.unit.ua/api/config/v1/sites';
+
+
 // function startSendRequests() {
-    sendRequest(
+
+//    get siteId
+sendRequest(
         siteInfoUrl,
         password2,
         'GET',
@@ -9,9 +27,9 @@
             console.log("get siteId " + siteid);
         }
     );
+
+//    request for active user count by floor
 function chartDrawFloor() {
-
-
     sendRequest(
         floorUrl,
         password,
@@ -25,6 +43,7 @@ function chartDrawFloor() {
     );
 }
 
+//    get correlation hourly
 function chartDrawType() {
     var hourlyCountUrl = 'https://cisco-presence.unit.ua/api/presence/v1/';
     var type = document.getElementById("oneValueHourly").value.replace('\”', '').replace('\”', '');
@@ -51,11 +70,13 @@ function chartDrawType() {
     );
 }
 
+
+
+//    get request for Analitics and presence
 function getOneValueVisitorsInfo() {
     var requestUrl = "https://cisco-presence.unit.ua/api/presence/v1/";
     var apiType = $("#apiType").val();
     var type = document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '');
-
 
     requestUrl += apiType + type + "?siteId="+siteid;
     if (type === "count") {
@@ -68,10 +89,7 @@ function getOneValueVisitorsInfo() {
         requestUrl += "&endDate=";
         requestUrl += $("#oneValueEndDate").val();
     }
-
     console.log(requestUrl);
-
-
     sendRequest(
         requestUrl,
         password2,
@@ -92,6 +110,8 @@ function getOneValueVisitorsInfo() {
 }
 
 // }
+
+// main func for ajax requests
 function sendRequest(url, pass, type, payload, success) {
     $.ajax({
         type:type,

@@ -7,6 +7,8 @@ google.charts.load('current', {'packages':['corechart', 'bar']});
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
 // draws it.
+
+// active user count
 function drawChartTotalUsers(data) {
     console.log(data);
     // Create the data table.
@@ -34,6 +36,7 @@ function drawChartTotalUsers(data) {
     chart.draw(chartData, options);
 }
 
+// correlation
 function drawHourlyGraph(data, type) {
     console.log(data);
 
