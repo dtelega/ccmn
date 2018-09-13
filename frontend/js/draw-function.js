@@ -85,3 +85,54 @@ function drawHourlyGraph(data, type) {
 
 }
 
+function drawHorlyGraphDwell(data, type) {
+    console.log(data);
+    console.log(data[0]);
+
+    var chartData = new google.visualization.DataTable();
+    chartData.addColumn('timeofday', 'Time of Day');
+    chartData.addColumn('number', 'FIVE_TO_THIRTY_MINUTES');
+    chartData.addColumn('number', 'THIRTY_TO_SIXTY_MINUTES');
+    chartData.addColumn('number', 'ONE_TO_FIVE_HOURS');
+    chartData.addColumn('number', 'FIVE_TO_EIGHT_HOURS');
+    chartData.addColumn('number', 'EIGHT_PLUS_HOURS');
+    
+    for (var i = 0; i < 24; i++) {
+
+        var first = data[i].FIVE_TO_THIRTY_MINUTES;
+        var second = data[i].THIRTY_TO_SIXTY_MINUTES;
+        var thrid = data[i].ONE_TO_FIVE_HOURS;
+        var fourth = data[i].FIVE_TO_EIGHT_HOURS;
+        var fifth = data[i].EIGHT_PLUS_HOURS;
+        chartData.addRow(
+            [{v: [i, 0, 0], f: i+""},
+                first,
+                second,
+                thrid,
+                fourth,
+                fifth
+        ]);
+    }
+
+
+    var options = {
+        title: 'Title',
+        isStacked: true,
+        hAxis: {
+            title: 'Time of Day',
+            format: 'h:mm a',
+            viewWindow: {
+                min: [0, 0, 0],
+                max: [24, 0, 0]
+            }
+        },
+        vAxis: {
+            title: 'Count of connected visitors',
+            'height': 700,
+            'width' : 3000
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+    chart.draw(chartData, options);
+}

@@ -64,7 +64,10 @@ function chartDrawType() {
         null,
         function (data) {
             google.charts.setOnLoadCallback(function () {
-                drawHourlyGraph(data, type);
+                if ($("#apiTypeHourly").val() === "dwell/") {
+                    drawHorlyGraphDwell(data, type);
+                } else
+                    drawHourlyGraph(data, type);
             });
         }
     );
