@@ -124,12 +124,18 @@
 
     <!--correlation-->
     <section id="correlation" style="display: none;">
+        <select id="apiTypeHourly">
+            <option selected value="connected/">Connected visitors</option>
+            <option value="passerby/">Passersby</option>
+            <!--<option value="repeatvisitors/">Repeat visitors</option>-->
+            <option value="visitor/">Visitors</option>
+        </select>
 
         <select id="oneValueHourly">
-            <option selected value=”hourly/today”>Hourly count of connected visitors today</option>
-            <option value=”hourly/yesterday”>Hourly count of connected visitors yesterday</option>
-            <option value=”hourly”>Hourly count of connected visitors for the specified day</option>
-            <!--<option value=”hourly/3days”>Hourly count of connected visitors in last 3 days</option>-->
+            <option selected value=”hourly/today”>Hourly count of visitors today</option>
+            <option value=”hourly/yesterday”>Hourly count of visitors yesterday</option>
+            <option value=”hourly”>Hourly count of visitors for the specified day</option>
+            <!--<option value=”hourly/3days”>Hourly count of visitors in last 3 days</option>-->
 
         </select>
         <input id="dravHourlyDate" placeholder="date" style="display: none">

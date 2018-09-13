@@ -26,9 +26,10 @@ function chartDrawFloor() {
 }
 
 function chartDrawType() {
-    var hourlyCountUrl = 'https://cisco-presence.unit.ua/api/presence/v1/connected/';
+    var hourlyCountUrl = 'https://cisco-presence.unit.ua/api/presence/v1/';
     var type = document.getElementById("oneValueHourly").value.replace('\”', '').replace('\”', '');
-    hourlyCountUrl += type+"?siteId="+siteid;
+    var apiType = document.getElementById("apiTypeHourly").value.replace('\”', '').replace('\”', '');
+    hourlyCountUrl += apiType + type+"?siteId="+siteid;
 
     if (type === "hourly") {
         hourlyCountUrl += "&date=";
