@@ -25,7 +25,7 @@ $("#oneValueVisitors").change(function () {
 $("#apiType").change(function () {
     var apiType = document.getElementById("apiType").value.replace('\”', '').replace('\”', '');
 
-    if (apiType === "repeatvisitors/") {
+    if (apiType === "repeatvisitors/" || apiType === "dwell/") {
         $("#repeatVisitorsInfo").show();
     }
     else

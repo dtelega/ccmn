@@ -91,6 +91,7 @@
             <option value="passerby/">Passersby</option>
             <option value="repeatvisitors/">Repeat visitors</option>
             <option value="visitor/">Visitors</option>
+            <option value="dwell/">Dwell</option>
         </select>
 
         Get Info about:
@@ -112,11 +113,11 @@
         <button onclick="getOneValueVisitorsInfo();">Get this</button>
         <p id="oneValueVisitorsInfo"></p>
         <div id="repeatVisitorsInfo" style="display: none">
-            <div>DAILY: <span id="repeatVisitorsInfoDaily"></span></div>
-            <div>WEEKLY: <span id="repeatVisitorsInfoWeekly"></span></div>
-            <div>OCCASIONAL: <span id="repeatVisitorsInfoOccas"></span></div>
-            <div>FIRST_TIME: <span id="repeatVisitorsInfoFirst"></span></div>
-            <div>YESTERDAY: <span id="repeatVisitorsInfoYesterday"></span></div>
+            <div><span id="repeatVisitorsInfoDaily"></span></div>
+            <div><span id="repeatVisitorsInfoWeekly"></span></div>
+            <div><span id="repeatVisitorsInfoOccas"></span></div>
+            <div><span id="repeatVisitorsInfoFirst"></span></div>
+            <div><span id="repeatVisitorsInfoYesterday"></span></div>
         </div>
 
     </section>
@@ -129,6 +130,7 @@
             <option value="passerby/">Passersby</option>
             <!--<option value="repeatvisitors/">Repeat visitors</option>-->
             <option value="visitor/">Visitors</option>
+            <!--<option value="dwell/">Dwell</option>-->
         </select>
 
         <select id="oneValueHourly">

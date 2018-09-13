@@ -96,14 +96,22 @@ function getOneValueVisitorsInfo() {
         'GET',
         null,
         function (data) {
-            if (apiType !== "repeatvisitors/")
+            if (apiType === "repeatvisitors/"){
+                $("#repeatVisitorsInfoDaily").html("DAILY: "+data.DAILY);
+                $("#repeatVisitorsInfoWeekly").html("WEEKLY: "+data.WEEKLY);
+                $("#repeatVisitorsInfoOccas").html("OCCASIONAL: "+data.OCCASIONAL);
+                $("#repeatVisitorsInfoFirst").html("FIRST_TIME: "+data.FIRST_TIME);
+                $("#repeatVisitorsInfoYesterday").html("YESTERDAY: "+data.YESTERDAY);
+            }
+            else if (apiType === "dwell/") {
+                $("#repeatVisitorsInfoDaily").html("FIVE_TO_THIRTY_MINUTES: "+data.FIVE_TO_THIRTY_MINUTES);
+                $("#repeatVisitorsInfoWeekly").html("THIRTY_TO_SIXTY_MINUTES: "+data.THIRTY_TO_SIXTY_MINUTES);
+                $("#repeatVisitorsInfoOccas").html("ONE_TO_FIVE_HOURS: "+data.ONE_TO_FIVE_HOURS);
+                $("#repeatVisitorsInfoFirst").html("FIVE_TO_EIGHT_HOURS: "+data.FIVE_TO_EIGHT_HOURS);
+                $("#repeatVisitorsInfoYesterday").html("EIGHT_PLUS_HOURS: "+data.EIGHT_PLUS_HOURS);
+            }
+            else  {
                 $("#oneValueVisitorsInfo").html(data);
-            else {
-                $("#repeatVisitorsInfoDaily").html(data.DAILY);
-                $("#repeatVisitorsInfoWeekly").html(data.WEEKLY);
-                $("#repeatVisitorsInfoOccas").html(data.OCCASIONAL);
-                $("#repeatVisitorsInfoFirst").html(data.FIRST_TIME);
-                $("#repeatVisitorsInfoYesterday").html(data.YESTERDAY);
             }
         }
     );
