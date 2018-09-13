@@ -27,9 +27,12 @@ $("#apiType").change(function () {
 
     if (apiType === "repeatvisitors/" || apiType === "dwell/") {
         $("#repeatVisitorsInfo").show();
+        $("#oneValueVisitorsInfo").hide();
     }
-    else
+    else {
         $("#repeatVisitorsInfo").hide();
+        $("#oneValueVisitorsInfo").show();
+    }
 });
 
 
