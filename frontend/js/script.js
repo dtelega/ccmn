@@ -128,6 +128,7 @@ const siteInfoUrl = 'https://cisco-presence.unit.ua/api/config/v1/sites';
 $('#active_user_count_btn').on('click', function () {
     $("#active_user_count").show();
     $("#floor_map").hide();
+    $("#correlation").hide();
 });
 
 $("#oneValueVisitors").change(function () {

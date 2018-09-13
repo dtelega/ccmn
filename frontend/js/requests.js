@@ -83,6 +83,7 @@ function getOneValueVisitorsInfo() {
         $("#active_user_count").show();
         $("#floor_map").hide();
         $("#presence").hide();
+        $("#correlation").hide();
 
     });
 
@@ -106,6 +107,7 @@ function getOneValueVisitorsInfo() {
         $("#active_user_count").hide();
         $("#floor_map").show();
         $("#presence").hide();
+        $("#correlation").hide();
 
     });
     $('#2nd_Floor_btn').on('click', function () {
@@ -126,6 +128,7 @@ function getOneValueVisitorsInfo() {
         $("#active_user_count").hide();
         $("#floor_map").show();
         $("#presence").hide();
+        $("#correlation").hide();
     });
     $('#3rd_Floor_btn').on('click', function () {
         sendRequest(
@@ -145,14 +148,22 @@ function getOneValueVisitorsInfo() {
         $("#active_user_count").hide();
         $("#floor_map").show();
         $("#presence").hide();
+        $("#correlation").hide();
     });
 
     $('#presence_btn').on('click', function () {
         $("#active_user_count").hide();
         $("#floor_map").hide();
         $("#presence").show();
+        $("#correlation").hide();
     });
 
+    $('#correlation_btn').on('click', function () {
+        $("#active_user_count").hide();
+        $("#floor_map").hide();
+        $("#presence").hide();
+        $("#correlation").show();
+    });
 
 // }
 function sendRequest(url, pass, type, payload, success) {
