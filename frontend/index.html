@@ -136,8 +136,8 @@
         <select id="oneValueHourly">
             <option selected value=”hourly/today”>Hourly count of visitors today</option>
             <option value=”hourly/yesterday”>Hourly count of visitors yesterday</option>
-            <option value=”hourly”>Hourly count of visitors for the specified day</option>
             <option value=”hourly/3days”>Hourly count of visitors in last 3 days</option>
+            <option value=”hourly”>Hourly count of visitors for the specified day</option>
 
         </select>
         <input id="dravHourlyDate" placeholder="date" style="display: none">
@@ -167,8 +167,10 @@
             <div>Average dwell:<span id="kpi-averageDwell"></span></div>
 
             <h2>Average dwell by levels</h2>
-            <div id="chart_div_kpi_average" style=""></div>
-            <div id="chart_div_kpi_count" style=""></div>
+            <div style="padding: 100px;">
+                <div id="chart_div_kpi_average" style="float:right;"></div>
+                <div id="chart_div_kpi_count" style=""></div>
+            </div>
 
             <h2>Top Manufacturers</h2>
             <div id="chart_div_kpi_manufact"></div>

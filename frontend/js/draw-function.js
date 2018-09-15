@@ -201,8 +201,8 @@ function drawTotalKpi(data, title) {
     // Set chart options
     var options = {
         'title': title,
-        'width': 1200,
-        'height': 700
+        'width': 800,
+        'height': 300
     };
 
     // Instantiate and draw our chart, passing in some options.
