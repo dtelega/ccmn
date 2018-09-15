@@ -63,7 +63,7 @@ function drawHourlyGraph(data, type) {
 
 
     var options = {
-        title: 'Title',
+        title: type,
         isStacked: true,
         hAxis: {
             title: 'Time of Day',
@@ -85,38 +85,35 @@ function drawHourlyGraph(data, type) {
 
 }
 
-function drawHorlyGraphDwell(data, type) {
+function drawHorlyGraphDwell(data, type, first, sec, third, fourth, fifth) {
     console.log(data);
-    console.log(data[0]);
+    console.log(type);
 
     var chartData = new google.visualization.DataTable();
     chartData.addColumn('timeofday', 'Time of Day');
-    chartData.addColumn('number', 'FIVE_TO_THIRTY_MINUTES');
-    chartData.addColumn('number', 'THIRTY_TO_SIXTY_MINUTES');
-    chartData.addColumn('number', 'ONE_TO_FIVE_HOURS');
-    chartData.addColumn('number', 'FIVE_TO_EIGHT_HOURS');
-    chartData.addColumn('number', 'EIGHT_PLUS_HOURS');
+    chartData.addColumn('number', first);
+    chartData.addColumn('number', sec);
+    chartData.addColumn('number', third);
+    chartData.addColumn('number', fourth);
+    chartData.addColumn('number', fifth);
     
     for (var i = 0; i < 24; i++) {
 
-        var first = data[i].FIVE_TO_THIRTY_MINUTES;
-        var second = data[i].THIRTY_TO_SIXTY_MINUTES;
-        var thrid = data[i].ONE_TO_FIVE_HOURS;
-        var fourth = data[i].FIVE_TO_EIGHT_HOURS;
-        var fifth = data[i].EIGHT_PLUS_HOURS;
+        if (typeof(data[i]) === 'undefined')
+            break;
         chartData.addRow(
             [{v: [i, 0, 0], f: i+""},
-                first,
-                second,
-                thrid,
-                fourth,
-                fifth
+                data[i][first],
+                data[i][sec],
+                data[i][third],
+                data[i][fourth],
+                data[i][fifth]
         ]);
     }
 
 
     var options = {
-        title: 'Title',
+        title: type,
         isStacked: true,
         hAxis: {
             title: 'Time of Day',
@@ -127,7 +124,7 @@ function drawHorlyGraphDwell(data, type) {
             }
         },
         vAxis: {
-            title: 'Count of connected visitors',
+            title: 'Count visitors',
             'height': 700,
             'width' : 3000
         }

@@ -65,7 +65,19 @@ function chartDrawType() {
         function (data) {
             google.charts.setOnLoadCallback(function () {
                 if ($("#apiTypeHourly").val() === "dwell/") {
-                    drawHorlyGraphDwell(data, type);
+                    drawHorlyGraphDwell(data, type,
+                        'FIVE_TO_THIRTY_MINUTES',
+                        'THIRTY_TO_SIXTY_MINUTES',
+                        'ONE_TO_FIVE_HOURS',
+                        'FIVE_TO_EIGHT_HOURS',
+                        'EIGHT_PLUS_HOURS');
+                } else if ($("#apiTypeHourly").val() === "repeatvisitors/") {
+                    drawHorlyGraphDwell(data, type,
+                        'DAILY',
+                        'WEEKLY',
+                        'OCCASIONAL',
+                        'FIRST_TIME',
+                        'YESTERDAY');
                 } else
                     drawHourlyGraph(data, type);
             });
@@ -136,6 +148,11 @@ function sendRequest(url, pass, type, payload, success) {
         success: success,
         error: function(){
             console.log('error ajax request!');
+        },
+        statusCode: {
+            404: function () {
+                alert('Sry ;( not available now');
+            }
         }
     });
 }
