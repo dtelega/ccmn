@@ -110,7 +110,7 @@
         <input id="oneValueDate" placeholder="date" style="display: none">
         <input id="oneValueStartDate" placeholder="start date" style="display: none">
         <input id="oneValueEndDate" placeholder="end date" style="display: none">
-        <button onclick="getOneValueVisitorsInfo();">Get this</button>
+        <button onclick="getOneValueVisitorsInfo();" class="btn btn-success">Get this</button>
         <p id="oneValueVisitorsInfo"></p>
         <div id="repeatVisitorsInfo" style="display: none">
             <div><span id="repeatVisitorsInfoDaily"></span></div>
@@ -141,21 +141,20 @@
 
         </select>
         <input id="dravHourlyDate" placeholder="date" style="display: none">
-        <button onclick="chartDrawType();">Get this</button>
+        <button onclick="chartDrawType();" class="btn btn-success">Get this</button>
         <div id="chart_div2" style="height: 1000px"></div>
     </section>
 
     <section id="kpi" style="display: none;">
-        <select id="kpi-select">
+        <select id="kpi-select" class="selectpicker">
             <option selected value=”kpisummary/today”>Site KPI Summary for today</option>
             <option value=”kpisummary/yesterday”>Site KPI Summary for yesterday</option>
             <option value=”kpisummary/3days”>Site KPI Summary for last 3 days</option>
             <option value=”kpisummary/lastweek”>Site KPI Summary for last 7 days</option>
             <option value=”kpisummary/lastmonth”>Site KPI Summary for last 30 days</option>
-
         </select>
         <input id="kpi-input" placeholder="date" style="display: none">
-        <button onclick="kpisummary()">Get this</button>
+        <button type="button" class="btn btn-success" onclick="kpisummary()">Get this</button>
 
         <div>
             <div>Visitor count:<span id="kpi-visitorCount"></span></div>
@@ -167,7 +166,7 @@
             <div>Average dwell:<span id="kpi-averageDwell"></span></div>
 
             <h2>Average dwell by levels</h2>
-            <div style="padding: 100px;">
+            <div style="padding: 50px;">
                 <div id="chart_div_kpi_average" style="float:right;"></div>
                 <div id="chart_div_kpi_count" style=""></div>
             </div>
