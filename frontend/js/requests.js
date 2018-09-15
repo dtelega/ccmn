@@ -78,13 +78,14 @@ function chartDrawType() {
                         'OCCASIONAL',
                         'FIRST_TIME',
                         'YESTERDAY');
+                } else if (type === "hourly/3days") {
+                    drawHorlyThreeDays(data, type);
                 } else
                     drawHourlyGraph(data, type);
             });
         }
     );
 }
-
 
 
 //    get request for Analitics and presence

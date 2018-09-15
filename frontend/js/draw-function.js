@@ -133,3 +133,46 @@ function drawHorlyGraphDwell(data, type, first, sec, third, fourth, fifth) {
     var chart = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
     chart.draw(chartData, options);
 }
+
+
+function drawHorlyThreeDays(data, type) {
+
+    var chartData = new google.visualization.DataTable();
+    chartData.addColumn('timeofday', 'Time of Day');
+    keys = [];
+    $.each(data, function(key){
+        chartData.addColumn('number', key);
+        keys.push(key);
+    });
+
+    console.log(keys);
+    for (var i = 0; i < 24; i++) {
+        chartData.addRow(
+            [{v: [i, 0, 0], f: i+""},
+                data[keys[0]][i],
+                data[keys[1]][i],
+                data[keys[2]][i]
+            ]);
+    }
+
+    var options = {
+        title: type,
+        isStacked: true,
+        hAxis: {
+            title: 'Time of Day',
+            format: 'h:mm a',
+            viewWindow: {
+                min: [0, 0, 0],
+                max: [24, 0, 0]
+            }
+        },
+        vAxis: {
+            title: 'Count visitors',
+            'height': 700,
+            'width' : 3000
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+    chart.draw(chartData, options);
+}
