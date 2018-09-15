@@ -135,7 +135,47 @@ function getOneValueVisitorsInfo() {
     );
 }
 
+
+//  get request for KPI
+function kpisummary() {
+    var requestUrl = "https://cisco-presence.unit.ua/api/presence/v1/";
+    var type = document.getElementById("kpi-select").value.replace('\”', '').replace('\”', '');
+
+    requestUrl += type + "?siteId="+siteid;
+    // if (type === "count") {
+    //     requestUrl += "&date=";
+    //     requestUrl += $("#oneValueDate").val();
+    // }
+    // if (type === "total") {
+    //     requestUrl += "&startDate=";
+    //     requestUrl += $("#oneValueStartDate").val();
+    //     requestUrl += "&endDate=";
+    //     requestUrl += $("#oneValueEndDate").val();
+    // }
+    console.log(requestUrl);
+    sendRequest(
+        requestUrl,
+        password2,
+        'GET',
+        null,
+        function (data) {
+            $("#kpi-visitorCount").html(data.visitorCount);
+            $("#kpi-totalPasserbyCount").html(data.totalPasserbyCount);
+            $("#kpi-totalVisitorCount").html(data.totalVisitorCount);
+            $("#kpi-totalConnectedCount").html(data.totalConnectedCount);
+            $("#kpi-connectedPercentage").html(data.connectedPercentage);
+            $("#kpi-conversionRate").html(data.conversionRate);
+            $("#kpi-averageDwell").html(data.averageDwell);
+            drawTotalKpi(data, "average");
+            drawTotalKpi(data, "count");
+            drawTotalManufact(data);
+
+        }
+    );
+}
+
 // }
+
 
 // main func for ajax requests
 function sendRequest(url, pass, type, payload, success) {

@@ -142,6 +142,36 @@
         <div id="chart_div2" style="height: 1000px"></div>
     </section>
 
+    <section id="kpi">
+        <select id="kpi-select">
+            <option selected value=”kpisummary/today”>Site KPI Summary for today</option>
+            <option value=”kpisummary/yesterday”>Site KPI Summary for yesterday</option>
+            <option value=”kpisummary/3days”>Site KPI Summary for last 3 days</option>
+            <option value=”kpisummary/lastweek”>Site KPI Summary for last 7 days</option>
+            <option value=”kpisummary/lastmonth”>Site KPI Summary for last 30 days</option>
+
+        </select>
+        <input id="kpi-input" placeholder="date" style="display: none">
+        <button onclick="kpisummary()">Get this</button>
+        <div>
+            <div>visitorCount:<span id="kpi-visitorCount"></span></div>
+            <div>totalPasserbyCount:<span id="kpi-totalPasserbyCount"></span></div>
+            <div>totalVisitorCount:<span id="kpi-totalVisitorCount"></span></div>
+            <div>totalConnectedCount:<span id="kpi-totalConnectedCount"></span></div>
+            <div>connectedPercentage:<span id="kpi-connectedPercentage"></span></div>
+            <div>conversionRate:<span id="kpi-conversionRate"></span></div>
+            <div>averageDwell:<span id="kpi-averageDwell"></span></div>
+
+            <h2>averageDwellByLevels</h2>
+            <div id="chart_div_kpi_average" style=""></div>
+            <div id="chart_div_kpi_count" style=""></div>
+
+            <h2>topManufacturers</h2>
+            <div id="chart_div_kpi_manufact"></div>
+        </div>
+
+    </section>
+
 </div>
 
 

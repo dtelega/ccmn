@@ -180,3 +180,61 @@ function drawHorlyThreeDays(data, type) {
 function drawHorlyGraphDwellThreeDays(data, type, first, sec, third, fourth, fifth) {
     // TODO
 }
+
+// averageDwellByLevels KPI
+function drawTotalKpi(data, title) {
+    console.log(data);
+
+    console.log(data.averageDwellByLevels.FIVE_TO_THIRTY_MINUTES[title]);
+    // Create the data table.
+    var chartData = new google.visualization.DataTable();
+    chartData.addColumn('string', 'Floor');
+    chartData.addColumn('number', 'UserCount');
+
+
+    chartData.addRow(['FIVE_TO_THIRTY_MINUTES', data.averageDwellByLevels.FIVE_TO_THIRTY_MINUTES[title]]);
+    chartData.addRow(['THIRTY_TO_SIXTY_MINUTES', data.averageDwellByLevels.THIRTY_TO_SIXTY_MINUTES[title]]);
+    chartData.addRow(['ONE_TO_FIVE_HOURS', data.averageDwellByLevels.ONE_TO_FIVE_HOURS[title]]);
+    chartData.addRow(['FIVE_TO_EIGHT_HOURS', data.averageDwellByLevels.FIVE_TO_EIGHT_HOURS[title]]);
+    chartData.addRow(['EIGHT_PLUS_HOURS', data.averageDwellByLevels.EIGHT_PLUS_HOURS[title]]);
+
+
+    // Set chart options
+    var options = {
+        'title': title,
+        'width': 1200,
+        'height': 700
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div_kpi_'+title));
+    chart.draw(chartData, options);
+}
+
+// total manufact kpi
+function drawTotalManufact(data) {
+    console.log(data);
+    // Create the data table.
+    var chartData = new google.visualization.DataTable();
+    chartData.addColumn('string', 'Manufacturers');
+    chartData.addColumn('number', 'count');
+
+    console.log(data.topManufacturers.manufacturerCounts);
+
+    $.each(data.topManufacturers.manufacturerCounts, function(key){
+        console.log(key, data.topManufacturers.manufacturerCounts[key]);
+
+        chartData.addRow([key, data.topManufacturers.manufacturerCounts[key]]);
+    });
+
+    // Set chart options
+    var options = {
+        'title': 'Total manufacturer',
+        'width': 1200,
+        'height': 700
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div_kpi_manufact'));
+    chart.draw(chartData, options);
+}
