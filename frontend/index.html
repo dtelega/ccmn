@@ -39,13 +39,13 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a id="presence_btn" class="nav-link" href="#">Analytics and Presence</a>
+                <a id="presence_btn" class="nav-link" href="#" onclick="getOneValueVisitorsInfo();">Analytics and Presence</a>
             </li>
             <!--<li class="nav-item">-->
                 <!--<a class="nav-link" href="#">Forecasting number of visitors</a>-->
             <!--</li>-->
             <li class="nav-item">
-                <a id="correlation_btn" class="nav-link" href="#">Correlations</a>
+                <a id="correlation_btn" class="nav-link" href="#" onclick="chartDrawType();">Correlations</a>
             </li>
             <li class="nav-item">
                 <a id="kpi_btn" class="nav-link" href="#">KPI</a>
@@ -158,31 +158,31 @@
         <button onclick="kpisummary()">Get this</button>
 
         <div>
-            <div>visitorCount:<span id="kpi-visitorCount"></span></div>
-            <div>totalPasserbyCount:<span id="kpi-totalPasserbyCount"></span></div>
-            <div>totalVisitorCount:<span id="kpi-totalVisitorCount"></span></div>
-            <div>totalConnectedCount:<span id="kpi-totalConnectedCount"></span></div>
-            <div>connectedPercentage:<span id="kpi-connectedPercentage"></span></div>
-            <div>conversionRate:<span id="kpi-conversionRate"></span></div>
-            <div>averageDwell:<span id="kpi-averageDwell"></span></div>
+            <div>Visitor count:<span id="kpi-visitorCount"></span></div>
+            <div>Total passer by count:<span id="kpi-totalPasserbyCount"></span></div>
+            <div>Total visitor count:<span id="kpi-totalVisitorCount"></span></div>
+            <div>Total connected count:<span id="kpi-totalConnectedCount"></span></div>
+            <div>Connected percent age:<span id="kpi-connectedPercentage"></span></div>
+            <div>Conversion rate:<span id="kpi-conversionRate"></span></div>
+            <div>Average dwell:<span id="kpi-averageDwell"></span></div>
 
-            <h2>averageDwellByLevels</h2>
+            <h2>Average dwell by levels</h2>
             <div id="chart_div_kpi_average" style=""></div>
             <div id="chart_div_kpi_count" style=""></div>
 
-            <h2>topManufacturers</h2>
+            <h2>Top Manufacturers</h2>
             <div id="chart_div_kpi_manufact"></div>
 
             <h2>Peak Summary</h2>
-            <div>peakHour:<span id="kpi-peakHour"></span></div>
-            <div>peakDate:<span id="kpi-peakDate"></span></div>
-            <div>peakWeek:<span id="kpi-peakWeek"></span></div>
-            <div>peakHourCount:<span id="kpi-peakHourCount"></span></div>
-            <div>averageHourlyCount:<span id="kpi-averageHourlyCount"></span></div>
-            <div>maxHour:<span id="kpi-maxHour"></span></div>
-            <div>maxDay:<span id="kpi-maxDay"></span></div>
-            <div>peakDayCount:<span id="kpi-peakDayCount"></span></div>
-            <div>peakHourDay:<span id="kpi-peakHourDay"></span></div>
+            <div>Peak hour:<span id="kpi-peakHour"></span></div>
+            <div>Peak date:<span id="kpi-peakDate"></span></div>
+            <div>Peak week:<span id="kpi-peakWeek"></span></div>
+            <div>Peak hour count:<span id="kpi-peakHourCount"></span></div>
+            <div>Average hourly count:<span id="kpi-averageHourlyCount"></span></div>
+            <div>Max hour:<span id="kpi-maxHour"></span></div>
+            <div>Max day:<span id="kpi-maxDay"></span></div>
+            <div>Peak day count:<span id="kpi-peakDayCount"></span></div>
+            <div>Peak hour day:<span id="kpi-peakHourDay"></span></div>
 
             <div id="chart-div-kpi-hourly-counts" style="height: 500px"></div>
 

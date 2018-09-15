@@ -98,4 +98,5 @@ $('#kpi_btn').on('click', function () {
     $("#presence").hide();
     $("#correlation").hide();
     $("#kpi").show();
+    kpisummary();
 });
