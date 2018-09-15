@@ -176,3 +176,7 @@ function drawHorlyThreeDays(data, type) {
     var chart = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
     chart.draw(chartData, options);
 }
+
+function drawHorlyGraphDwellThreeDays(data, type, first, sec, third, fourth, fifth) {
+    // TODO
+}

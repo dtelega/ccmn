@@ -64,13 +64,15 @@ function chartDrawType() {
         null,
         function (data) {
             google.charts.setOnLoadCallback(function () {
-                if ($("#apiTypeHourly").val() === "dwell/") {
+                if ($("#apiTypeHourly").val() === "dwell/" && type !=="hourly/3days" ) {
                     drawHorlyGraphDwell(data, type,
                         'FIVE_TO_THIRTY_MINUTES',
                         'THIRTY_TO_SIXTY_MINUTES',
                         'ONE_TO_FIVE_HOURS',
                         'FIVE_TO_EIGHT_HOURS',
                         'EIGHT_PLUS_HOURS');
+                } else if ($("#apiTypeHourly").val() === "dwell/" || $("#apiTypeHourly").val() === "repeatvisitors/" && type ==="hourly/3days" ) {
+                    alert("Sry ;( not available now");
                 } else if ($("#apiTypeHourly").val() === "repeatvisitors/") {
                     drawHorlyGraphDwell(data, type,
                         'DAILY',
