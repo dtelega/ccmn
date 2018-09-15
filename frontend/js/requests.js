@@ -83,7 +83,7 @@ function chartDrawType() {
                 } else if (type === "hourly/3days") {
                     drawHorlyThreeDays(data, type);
                 } else
-                    drawHourlyGraph(data, type);
+                    drawHourlyGraph(data, type, 'chart_div2');
             });
         }
     );
@@ -169,6 +169,18 @@ function kpisummary() {
             drawTotalKpi(data, "average");
             drawTotalKpi(data, "count");
             drawTotalManufact(data);
+            $("#kpi-peakHour").html(data.peakSummary.peakHour);
+            $("#kpi-peakDate").html(data.peakSummary.peakDate);
+            $("#kpi-peakWeek").html(data.peakSummary.peakWeek);
+            $("#kpi-peakHourCount").html(data.peakSummary.peakHourCount);
+            $("#kpi-averageHourlyCount").html(data.peakSummary.averageHourlyCount);
+            $("#kpi-maxHour").html(data.peakSummary.maxHour);
+            $("#kpi-maxDay").html(data.peakSummary.maxDay);
+            $("#kpi-peakDayCount").html(data.peakSummary.peakDayCount);
+            $("#kpi-peakHourDay").html(data.peakSummary.peakHourDay);
+            if (data.peakSummary.hourlyCounts !== null)
+              drawHourlyGraph(data.peakSummary.hourlyCounts, 'Hourly counts', 'chart-div-kpi-hourly-counts');
+
 
         }
     );

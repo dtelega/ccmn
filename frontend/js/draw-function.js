@@ -37,23 +37,21 @@ function drawChartTotalUsers(data) {
 }
 
 // correlation
-function drawHourlyGraph(data, type) {
+function drawHourlyGraph(data, type, path) {
     console.log(data);
 
     var chartData = new google.visualization.DataTable();
     chartData.addColumn('timeofday', 'Time of Day');
-    if (type === "hourly/today")
-        chartData.addColumn('number', 'Today');
-    else if (type === "hourly/yesterday")
-        chartData.addColumn('number', 'Yesterday');
-    else if (type === "hourly") {
+
+    if (type === "hourly") {
         chartData.addColumn('number', $("#dravHourlyDate").val()+'');
     }
     else if (type === "hourly/3days") { // TODO: make multichart great again
         chartData.addColumn('number', '1');
         chartData.addColumn('number', '2');
         chartData.addColumn('number', '3');
-    }
+    } else
+        chartData.addColumn('number', type);
 
     for (var i = 0; i < 25; i++) {
         chartData.addRow(
@@ -74,13 +72,14 @@ function drawHourlyGraph(data, type) {
             }
         },
         vAxis: {
-            title: 'Count of connected visitors',
+            title: 'Count of visitors',
             'height': 700,
             'width' : 3000
         }
     };
 
-    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+
+    var chart = new google.visualization.ColumnChart(document.getElementById(path));
     chart.draw(chartData, options);
 
 }

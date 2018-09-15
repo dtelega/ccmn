@@ -47,6 +47,9 @@
             <li class="nav-item">
                 <a id="correlation_btn" class="nav-link" href="#">Correlations</a>
             </li>
+            <li class="nav-item">
+                <a id="kpi_btn" class="nav-link" href="#">KPI</a>
+            </li>
             <!--<li class="nav-item">-->
                 <!--<a class="nav-link disabled" href="#">Disabled</a>-->
             <!--</li>-->
@@ -142,7 +145,7 @@
         <div id="chart_div2" style="height: 1000px"></div>
     </section>
 
-    <section id="kpi">
+    <section id="kpi" style="display: none;">
         <select id="kpi-select">
             <option selected value=”kpisummary/today”>Site KPI Summary for today</option>
             <option value=”kpisummary/yesterday”>Site KPI Summary for yesterday</option>
@@ -153,6 +156,7 @@
         </select>
         <input id="kpi-input" placeholder="date" style="display: none">
         <button onclick="kpisummary()">Get this</button>
+
         <div>
             <div>visitorCount:<span id="kpi-visitorCount"></span></div>
             <div>totalPasserbyCount:<span id="kpi-totalPasserbyCount"></span></div>
@@ -168,6 +172,20 @@
 
             <h2>topManufacturers</h2>
             <div id="chart_div_kpi_manufact"></div>
+
+            <h2>Peak Summary</h2>
+            <div>peakHour:<span id="kpi-peakHour"></span></div>
+            <div>peakDate:<span id="kpi-peakDate"></span></div>
+            <div>peakWeek:<span id="kpi-peakWeek"></span></div>
+            <div>peakHourCount:<span id="kpi-peakHourCount"></span></div>
+            <div>averageHourlyCount:<span id="kpi-averageHourlyCount"></span></div>
+            <div>maxHour:<span id="kpi-maxHour"></span></div>
+            <div>maxDay:<span id="kpi-maxDay"></span></div>
+            <div>peakDayCount:<span id="kpi-peakDayCount"></span></div>
+            <div>peakHourDay:<span id="kpi-peakHourDay"></span></div>
+
+            <div id="chart-div-kpi-hourly-counts" style="height: 500px"></div>
+
         </div>
 
     </section>

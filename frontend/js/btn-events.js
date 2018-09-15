@@ -5,6 +5,7 @@ $('#active_user_count_btn').on('click', function () {
     $("#floor_map").hide();
     $("#presence").hide();
     $("#correlation").hide();
+    $("#kpi").hide();
 
 });
 
@@ -29,6 +30,7 @@ $('#1st_Floor_btn').on('click', function () {
     $("#floor_map").show();
     $("#presence").hide();
     $("#correlation").hide();
+    $("#kpi").hide();
 
 });
 $('#2nd_Floor_btn').on('click', function () {
@@ -50,6 +52,7 @@ $('#2nd_Floor_btn').on('click', function () {
     $("#floor_map").show();
     $("#presence").hide();
     $("#correlation").hide();
+    $("#kpi").hide();
 });
 $('#3rd_Floor_btn').on('click', function () {
     sendRequest(
@@ -70,6 +73,7 @@ $('#3rd_Floor_btn').on('click', function () {
     $("#floor_map").show();
     $("#presence").hide();
     $("#correlation").hide();
+    $("#kpi").hide();
 });
 
 $('#presence_btn').on('click', function () {
@@ -77,6 +81,7 @@ $('#presence_btn').on('click', function () {
     $("#floor_map").hide();
     $("#presence").show();
     $("#correlation").hide();
+    $("#kpi").hide();
 });
 
 $('#correlation_btn').on('click', function () {
@@ -84,4 +89,13 @@ $('#correlation_btn').on('click', function () {
     $("#floor_map").hide();
     $("#presence").hide();
     $("#correlation").show();
+    $("#kpi").hide();
+});
+
+$('#kpi_btn').on('click', function () {
+    $("#active_user_count").hide();
+    $("#floor_map").hide();
+    $("#presence").hide();
+    $("#correlation").hide();
+    $("#kpi").show();
 });
