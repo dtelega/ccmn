@@ -57,11 +57,15 @@ $("#kpi-select").change(function () {
         $("#kpi-input-startDate").show();
         $("#kpi-input-endDate").show();
 
+        $("#peakSumm").hide();
+
     }
     else {
         $("#kpi-input-date").hide();
         $("#kpi-input-startDate").hide();
         $("#kpi-input-endDate").hide();
+
+        $("#peakSumm").show();
     }
 
 });

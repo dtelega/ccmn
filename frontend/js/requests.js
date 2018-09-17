@@ -145,9 +145,14 @@ function kpisummary() {
 
     requestUrl += type + "?siteId="+siteid;
     if (type === "kpisummary") {
-        requestUrl += "&date=" + $("#kpi-input-date").val();
-        requestUrl += "&startDate=" + $("#kpi-input-startDate").val();
-        requestUrl += "&endDate=" + $("#kpi-input-endDate").val();
+        console.log($("#kpi-input-date").val());
+
+        if ($("#kpi-input-date").val())
+            requestUrl += "&date=" + $("#kpi-input-date").val();
+        else {
+            requestUrl += "&startDate=" + $("#kpi-input-startDate").val();
+            requestUrl += "&endDate=" + $("#kpi-input-endDate").val();
+        }
     }
     // if (type === "count") {
     //     requestUrl += "&date=";
@@ -176,17 +181,21 @@ function kpisummary() {
             drawTotalKpi(data, "average");
             drawTotalKpi(data, "count");
             drawTotalManufact(data);
-            $("#kpi-peakHour").html(data.peakSummary.peakHour);
-            $("#kpi-peakDate").html(data.peakSummary.peakDate);
-            $("#kpi-peakWeek").html(data.peakSummary.peakWeek);
-            $("#kpi-peakHourCount").html(data.peakSummary.peakHourCount);
-            $("#kpi-averageHourlyCount").html(data.peakSummary.averageHourlyCount);
-            $("#kpi-maxHour").html(data.peakSummary.maxHour);
-            $("#kpi-maxDay").html(data.peakSummary.maxDay);
-            $("#kpi-peakDayCount").html(data.peakSummary.peakDayCount);
-            $("#kpi-peakHourDay").html(data.peakSummary.peakHourDay);
-            if (data.peakSummary.hourlyCounts !== null)
-              drawHourlyGraph(data.peakSummary.hourlyCounts, 'Hourly counts', 'chart-div-kpi-hourly-counts');
+            if (type === "kpisummary" && $("#kpi-input-startDate").val()) {
+
+            } else {
+                $("#kpi-peakHour").html(data.peakSummary.peakHour);
+                $("#kpi-peakDate").html(data.peakSummary.peakDate);
+                $("#kpi-peakWeek").html(data.peakSummary.peakWeek);
+                $("#kpi-peakHourCount").html(data.peakSummary.peakHourCount);
+                $("#kpi-averageHourlyCount").html(data.peakSummary.averageHourlyCount);
+                $("#kpi-maxHour").html(data.peakSummary.maxHour);
+                $("#kpi-maxDay").html(data.peakSummary.maxDay);
+                $("#kpi-peakDayCount").html(data.peakSummary.peakDayCount);
+                $("#kpi-peakHourDay").html(data.peakSummary.peakHourDay);
+                if (data.peakSummary.hourlyCounts !== null)
+                  drawHourlyGraph(data.peakSummary.hourlyCounts, 'Hourly counts', 'chart-div-kpi-hourly-counts');
+                }
 
 
         }
