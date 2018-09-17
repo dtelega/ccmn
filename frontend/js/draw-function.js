@@ -28,7 +28,8 @@ function drawChartTotalUsers(data) {
     var options = {
         'title': 'Total active user count = '+ data.total.total,
         'width': 1200,
-        'height': 700
+        'height': 700,
+        pieSliceText: 'label'
     };
 
     // Instantiate and draw our chart, passing in some options.
@@ -202,7 +203,7 @@ function drawTotalKpi(data, title) {
     var options = {
         'title': title,
         'width': 800,
-        'height': 300
+        'height': 300,
     };
 
     // Instantiate and draw our chart, passing in some options.
@@ -230,7 +231,8 @@ function drawTotalManufact(data) {
     var options = {
         'title': 'Total manufacturer',
         'width': 1200,
-        'height': 700
+        'height': 700,
+        pieSliceText: 'label'
     };
 
     // Instantiate and draw our chart, passing in some options.
