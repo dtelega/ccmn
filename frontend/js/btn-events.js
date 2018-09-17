@@ -11,16 +11,37 @@ $('#active_user_count_btn').on('click', function () {
 
 $('#1st_Floor_btn').on('click', function () {
 
-    sendRequest(
-        imageUrl+"1st_Floor",
-        password,
-        'GET',
-        null,
-        function () {
-            console.log("success download floor image");
-            $(".img_floor1").html('<img  width="100%" src="' + imageUrl+"1st_Floor" + '" />');
-        }
-    );
+    // $.ajax({
+    //     url : floorUrl,
+    //     cache: true,
+    //     processData : false,
+    //     responseType: 'blob',
+    //     headers: {
+    //         "Authorization": "Basic " + btoa(username + ":" + password)
+    //     },
+    //     success: function (data) {
+    //         var image = new Image();
+    //         image.src = imageUrl.createObjectURL(data);
+    //         $('.img_floor1').append(image).removeClass('hidden').addClass('visible');
+    //         image.onload = function() { var imageWidth = image.width/2; $('.img_floor1').css({'margin-left':'-'+imageWidth+'px'}) };
+    //         // $('#overlay').removeClass('hidden').addClass('visible');
+    //     }
+    // }).always(function(){
+    //     $("#img-floor").attr("src", floorUrl);
+    // });
+
+
+
+    // sendRequest(
+    //     imageUrl+"1st_Floor",
+    //     password,
+    //     'GET',
+    //     null,
+    //     function () {
+    //         console.log("success download floor image");
+    //         $(".img_floor1").html('<img  width="100%" src="' + imageUrl+"1st_Floor" + '" />');
+    //     }
+    // );
     $(".img_floor1").show();
     $(".img_floor2").hide();
     $(".img_floor3").hide();

@@ -13,7 +13,6 @@ const imageUrl = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Ca
 // for siteId
 const siteInfoUrl = 'https://cisco-presence.unit.ua/api/config/v1/sites';
 
-
 // function startSendRequests() {
 
 //    get siteId
@@ -30,6 +29,9 @@ sendRequest(
 
 //    request for active user count by floor
 function chartDrawFloor() {
+
+
+
     sendRequest(
         floorUrl,
         password,
