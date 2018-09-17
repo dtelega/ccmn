@@ -142,6 +142,11 @@ function kpisummary() {
     var type = document.getElementById("kpi-select").value.replace('\”', '').replace('\”', '');
 
     requestUrl += type + "?siteId="+siteid;
+    if (type === "kpisummary") {
+        requestUrl += "&date=" + $("#kpi-input-date").val();
+        requestUrl += "&startDate=" + $("#kpi-input-startDate").val();
+        requestUrl += "&endDate=" + $("#kpi-input-endDate").val();
+    }
     // if (type === "count") {
     //     requestUrl += "&date=";
     //     requestUrl += $("#oneValueDate").val();

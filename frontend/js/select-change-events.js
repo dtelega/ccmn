@@ -47,3 +47,21 @@ $("#oneValueHourly").change(function () {
         $("#dravHourlyDate").hide();
     }
 });
+
+$("#kpi-select").change(function () {
+    var type = $("#kpi-select").val();
+
+    console.log("change to "+type);
+    if (type === "kpisummary") {
+        $("#kpi-input-date").show();
+        $("#kpi-input-startDate").show();
+        $("#kpi-input-endDate").show();
+
+    }
+    else {
+        $("#kpi-input-date").hide();
+        $("#kpi-input-startDate").hide();
+        $("#kpi-input-endDate").hide();
+    }
+
+});

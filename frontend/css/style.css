@@ -21,6 +21,7 @@ a:focus {
 
 body {
     padding-top: 70px;
+    font-family: 'Roboto', sans-serif;;
 }
 
 section {
@@ -31,5 +32,45 @@ section {
     margin: 10%;
 }
 
-/*for select box*/
+h2 {
+    text-align: center;
+}
 
+.content span {
+    color: #016666;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+button {
+    margin-left: 20px;
+    margin-top:-4px;
+}
+input {
+    width: 100px;
+}
+
+input, button, select {
+    height: 40px;
+}
+
+
+.info-block {
+    padding: 15px;
+    margin: 50px;
+    width: 500px;
+}
+
+#kpi .info-block div {
+    margin-top: 5px;
+    border-bottom: 1px solid grey;
+}
+#oneValueVisitorsInfo {
+    margin: 50px;
+    padding: 15px;
+    font-weight: bold;
+    border: 1px solid grey;
+    width: 300px;
+    border-radius: 5px;
+    background: #e9f0f6;
+}
