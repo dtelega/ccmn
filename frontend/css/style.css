@@ -60,6 +60,9 @@ input, button, select {
     padding: 15px;
     margin: 50px;
     width: 500px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background: #e9f0f6;
 }
 
 #kpi .info-block div {
