@@ -10,7 +10,7 @@ $('#active_user_count_btn').on('click', function () {
 });
 
 $('#1st_Floor_btn').on('click', function () {
-    imageRequest('1st_Floor');
+    imageRequest('1st_Floor', null);
 
 
 
@@ -25,14 +25,13 @@ $('#1st_Floor_btn').on('click', function () {
     $("#correlation").hide();
     $("#kpi").hide();
 
-    // del svg and
-
+    // del svg
     $(".img2nd_Floor").html("");
     $(".img3rd_Floor").html("");
 
 });
 $('#2nd_Floor_btn').on('click', function () {
-    imageRequest('2nd_Floor');
+    imageRequest('2nd_Floor', null);
 
     $(".img1st_loor").hide();
     $(".img2nd_Floor").show();
@@ -50,7 +49,7 @@ $('#2nd_Floor_btn').on('click', function () {
 
 });
 $('#3rd_Floor_btn').on('click', function () {
-    imageRequest('3rd_Floor');
+    imageRequest('3rd_Floor', null);
     $(".img1st_Floor").hide();
     $(".img2nd_Floor").hide();
     $(".img3rd_Floor").show();

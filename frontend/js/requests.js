@@ -46,7 +46,7 @@ function chartDrawFloor() {
 }
 
 //    get image
-function imageRequest(floorName) {
+function imageRequest(floorName, macAddress) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'blob'; //so you can access the response like a normal URL
     xhr.onreadystatechange = function () {
@@ -57,7 +57,7 @@ function imageRequest(floorName) {
             $('.img'+floorName).html(img);
 
             // add circles on map
-            drawCircle(floorName);
+            drawCircle(floorName, macAddress);
 
         }
     };
@@ -66,7 +66,7 @@ function imageRequest(floorName) {
     xhr.send();
 }
 
-function drawCircle(floorName) {
+function drawCircle(floorName, macAddress) {
 
     sendRequest(
         'https://cisco-cmx.unit.ua/api/location/v2/clients',
@@ -79,19 +79,30 @@ function drawCircle(floorName) {
                 console.log(floorName);
 
                 if (data[key].mapInfo.mapHierarchyString.indexOf(floorName) !== -1) {
-                    // console.log(data[key].macAddress,data[key].mapInfo.mapHierarchyString);
-                    $('.img'+floorName).append(
-                        "<svg height='10' width='10'>"
-                        + "<circle cx='"
-                        + data[key].mapCoordinate.x
-                        + "50' cy='"
-                        + data[key].mapCoordinate.y
-                        + "50' r='7' stroke-width='3' stroke='black' fill='red'>"
-                        + "<title>"
-                        + data[key].macAddress
-                        + "</title>"
-                        + "</circle></svg>"
-                    );
+                    if (macAddress !== null ) {
+
+                        // draw only one circle
+                        if (data[key].macAddress.indexOf(macAddress) !== -1) {
+                            console.log("here");
+                            $('.img'+floorName).append(
+                                "<svg height='10' width='10'>"
+                                + "<circle cx='" + data[key].mapCoordinate.x
+                                + "' cy='" + data[key].mapCoordinate.y
+                                + "' r='10' stroke-width='3' stroke='black' fill='red'>"
+                                + "<title>" + data[key].macAddress + "</title>"
+                                + "</circle></svg>"
+                            );
+                        }
+                    } else {
+                        $('.img'+floorName).append(
+                            "<svg height='10' width='10'>"
+                            + "<circle cx='" + data[key].mapCoordinate.x
+                            + "' cy='" + data[key].mapCoordinate.y
+                            + "' r='7' stroke-width='3' stroke='black' fill='red'>"
+                            + "<title>" + data[key].macAddress + "</title>"
+                            + "</circle></svg>"
+                        );
+                    }
 
                 }
             });
@@ -102,6 +113,52 @@ function drawCircle(floorName) {
 
 
 }
+
+// get client info
+function getClientInfo() {
+
+    macAddress = $("#macAddressInput").val();
+    sendRequest(
+        'https://cisco-cmx.unit.ua/api/location/v2/clients?macAddress='+macAddress,
+        password,
+        'GET',
+        null,
+        function (data) {
+            console.log('https://cisco-cmx.unit.ua/api/location/v2/clients?macAddress='+macAddress);
+            console.log(data);
+            $("#floorMacAddress").html(data[0].macAddress);
+            $("#mapHierarchyString").html(data[0].mapInfo.mapHierarchyString);
+            $("#firstLocatedTime").html(data[0].statistics.firstLocatedTime);
+            $("#lastLocatedTime").html(data[0].statistics.lastLocatedTime);
+            $("#networkStatus").html(data[0].networkStatus);
+            $("#manufacturer").html(data[0].manufacturer);
+            $("#bytesSent").html(data[0].bytesSent);
+            $("#bytesReceived").html(data[0].bytesReceived);
+
+            if (data[0].mapInfo.mapHierarchyString.indexOf('1st_Floor')) {
+                $(".img1st_Floor").show();
+                $(".img2nd_Floor").hide();
+                $(".img3rd_Floor").hide();
+
+                $(".img1st_Floor").html("");
+                $(".img2nd_Floor").html("");
+                $(".img3rd_Floor").html("");
+
+                imageRequest('1st_Floor', data[0].macAddress);
+                //
+            }
+            else if (data[0].mapInfo.mapHierarchyString.indexOf('2nd_Floor')){
+
+            }
+            else if (data[0].mapInfo.mapHierarchyString.indexOf('3rd_Floor')) {
+
+            }
+
+        }
+    )
+}
+
+
 
 //    get correlation hourly
 function chartDrawType() {
@@ -259,6 +316,9 @@ function kpisummary() {
         }
     );
 }
+
+
+
 
 // }
 
