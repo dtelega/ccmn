@@ -53,13 +53,12 @@ function imageRequest(floorName) {
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
             var img = document.createElement('img');
             img.src = URL.createObjectURL(xhr.response); //create <img> with src set to the blob
-            img.useMap = '#'+floorName; //create <img> with src set to the blob
-            $('.'+floorName).html(img);
+            img.useMap = '#img'+floorName; //create <img> with src set to the blob
+            $('.img'+floorName).html(img);
 
             // add circles on map
-            $('.'+floorName).append(
-                "<svg href='#' height='10' width='10'><circle cx='50' cy='50' r='10' stroke-width='3' fill='red'></circle></svg>"
-            );
+            drawCircle(floorName);
+
         }
     };
     xhr.open('GET', imageUrl+floorName, true);
@@ -67,6 +66,35 @@ function imageRequest(floorName) {
     xhr.send();
 }
 
+function drawCircle(floorName) {
+
+    sendRequest(
+        'https://cisco-cmx.unit.ua/api/location/v2/clients',
+        password,
+        'GET',
+        null,
+        function (data) {
+            $.each(data, function(key){
+
+                console.log(floorName);
+
+                if (data[key].mapInfo.mapHierarchyString.indexOf(floorName) !== -1) {
+                    // console.log(data[key].macAddress,data[key].mapInfo.mapHierarchyString);
+                    $('.img'+floorName).append(
+                        "<svg href='#' height='10' width='10'><circle cx='"
+                        +data[key].mapCoordinate.x +"50' cy='"
+                        + data[key].mapCoordinate.y +"50' r='7' stroke-width='3' stroke='black' fill='red'></circle></svg>"
+                    );
+
+                }
+            });
+
+        }
+    );
+
+
+
+}
 
 //    get correlation hourly
 function chartDrawType() {

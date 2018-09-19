@@ -14,9 +14,9 @@ $('#1st_Floor_btn').on('click', function () {
 
 
 
-    $(".img_floor1").show();
-    $(".img_floor2").hide();
-    $(".img_floor3").hide();
+    $(".img1st_Floor").show();
+    $(".img2nd_Floor").hide();
+    $(".img3rd_Floor").hide();
 
 
     $("#active_user_count").hide();
@@ -24,32 +24,46 @@ $('#1st_Floor_btn').on('click', function () {
     $("#presence").hide();
     $("#correlation").hide();
     $("#kpi").hide();
+
+    // del svg and
+
+    $(".img2nd_Floor").html("");
+    $(".img3rd_Floor").html("");
 
 });
 $('#2nd_Floor_btn').on('click', function () {
     imageRequest('2nd_Floor');
 
-    $(".img_floor1").hide();
-    $(".img_floor2").show();
-    $(".img_floor3").hide();
+    $(".img1st_loor").hide();
+    $(".img2nd_Floor").show();
+    $(".img3rd_Floor").hide();
 
     $("#active_user_count").hide();
     $("#floor_map").show();
     $("#presence").hide();
     $("#correlation").hide();
     $("#kpi").hide();
+
+    $(".img1st_Floor").html("");
+
+    $(".img3rd_Floor").html("");
+
 });
 $('#3rd_Floor_btn').on('click', function () {
     imageRequest('3rd_Floor');
-    $(".img_floor1").hide();
-    $(".img_floor2").hide();
-    $(".img_floor3").show();
+    $(".img1st_Floor").hide();
+    $(".img2nd_Floor").hide();
+    $(".img3rd_Floor").show();
 
     $("#active_user_count").hide();
     $("#floor_map").show();
     $("#presence").hide();
     $("#correlation").hide();
     $("#kpi").hide();
+
+    $(".img1st_Floor").html("");
+    $(".img2nd_Floor").html("");
+    
 });
 
 $('#presence_btn').on('click', function () {
