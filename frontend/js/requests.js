@@ -81,9 +81,16 @@ function drawCircle(floorName) {
                 if (data[key].mapInfo.mapHierarchyString.indexOf(floorName) !== -1) {
                     // console.log(data[key].macAddress,data[key].mapInfo.mapHierarchyString);
                     $('.img'+floorName).append(
-                        "<svg href='#' height='10' width='10'><circle cx='"
-                        +data[key].mapCoordinate.x +"50' cy='"
-                        + data[key].mapCoordinate.y +"50' r='7' stroke-width='3' stroke='black' fill='red'></circle></svg>"
+                        "<svg height='10' width='10'>"
+                        + "<circle cx='"
+                        + data[key].mapCoordinate.x
+                        + "50' cy='"
+                        + data[key].mapCoordinate.y
+                        + "50' r='7' stroke-width='3' stroke='black' fill='red'>"
+                        + "<title>"
+                        + data[key].macAddress
+                        + "</title>"
+                        + "</circle></svg>"
                     );
 
                 }

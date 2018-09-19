@@ -63,7 +63,7 @@ $('#3rd_Floor_btn').on('click', function () {
 
     $(".img1st_Floor").html("");
     $(".img2nd_Floor").html("");
-    
+
 });
 
 $('#presence_btn').on('click', function () {

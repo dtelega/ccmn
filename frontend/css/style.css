@@ -89,4 +89,14 @@ input, button, select {
 
 svg {
     overflow: visible;
+
+    transition: 200ms;
+    transition-timing-function: ease-in-out;
+    -webkit-transition: 200ms;
+    -webkit-transition-timing-function: ease-in-out;
+}
+svg:hover {
+    cursor: pointer;
+    fill: 'green';
+    stroke: 'red';
 }
