@@ -31,3 +31,13 @@ password2 = 'Passw0rd';
 
 
 
+// $( document ).ajaxSend(function( event, jqxhr, settings ) {
+//     console.log(settings);
+//     console.log(settings.headers.Authorization === null);
+//     if (settings.headers.Authorization === null) {
+//         console.log("Adding header");
+//         settings.headers = {
+//             "Authorization": "Basic " + btoa(username + ":" + password)
+//         }
+//     }
+// });

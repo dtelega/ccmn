@@ -45,6 +45,29 @@ function chartDrawFloor() {
     );
 }
 
+//    get image
+function imageRequest(floorName) {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob'; //so you can access the response like a normal URL
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            var img = document.createElement('img');
+            img.src = URL.createObjectURL(xhr.response); //create <img> with src set to the blob
+            img.useMap = '#'+floorName; //create <img> with src set to the blob
+            $('.'+floorName).html(img);
+
+            // add circles on map
+            $('.'+floorName).append(
+                "<svg href='#' height='10' width='10'><circle cx='50' cy='50' r='10' stroke-width='3' fill='red'></circle></svg>"
+            );
+        }
+    };
+    xhr.open('GET', imageUrl+floorName, true);
+    xhr.setRequestHeader('Authorization', "Basic " + btoa(username + ":" + password));
+    xhr.send();
+}
+
+
 //    get correlation hourly
 function chartDrawType() {
     var hourlyCountUrl = 'https://cisco-presence.unit.ua/api/presence/v1/';
