@@ -85,7 +85,7 @@ function drawCircle(floorName, macAddress) {
                         if (data[key].macAddress.indexOf(macAddress) !== -1) {
                             console.log("here");
                             $('.img'+floorName).append(
-                                "<svg height='10' width='10'>"
+                                "<svg height='10' width='10' >"
                                 + "<circle cx='" + data[key].mapCoordinate.x
                                 + "' cy='" + data[key].mapCoordinate.y
                                 + "' r='10' stroke-width='3' stroke='black' fill='red'>"
@@ -96,9 +96,9 @@ function drawCircle(floorName, macAddress) {
                     } else {
                         $('.img'+floorName).append(
                             "<svg height='10' width='10'>"
-                            + "<circle cx='" + data[key].mapCoordinate.x
+                            + "<circle id='"+data[key].macAddress+"' cx='" + data[key].mapCoordinate.x
                             + "' cy='" + data[key].mapCoordinate.y
-                            + "' r='7' stroke-width='3' stroke='black' fill='red'>"
+                            + "' r='7' stroke-width='3' stroke='black' fill='red' onclick='console.log($(this).attr(\"id\"))'>"
                             + "<title>" + data[key].macAddress + "</title>"
                             + "</circle></svg>"
                         );
