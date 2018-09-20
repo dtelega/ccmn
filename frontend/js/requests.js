@@ -79,7 +79,7 @@ function drawCircle(floorName, macAddress) {
                 console.log(floorName);
 
                 if (data[key].mapInfo.mapHierarchyString.indexOf(floorName) !== -1) {
-                    if (macAddress !== null ) {
+                    if (macAddress === data[key].macAddress) {
 
                         // draw only one circle
                         if (data[key].macAddress.indexOf(macAddress) !== -1) {
@@ -87,7 +87,7 @@ function drawCircle(floorName, macAddress) {
                                 "<svg height='10' width='10' >"
                                 + "<circle cx='" + data[key].mapCoordinate.x
                                 + "' cy='" + data[key].mapCoordinate.y
-                                + "' r='10' stroke-width='3' stroke='black' fill='red'>"
+                                + "' r='11' stroke-width='3' stroke='black' fill='yellow'>"
                                 + "<title>" + data[key].macAddress + "</title>"
                                 + "</circle></svg>"
                             );
@@ -111,14 +111,17 @@ function drawCircle(floorName, macAddress) {
 
 }
 
-// draw one circle on click on map
+// draw one circle on click on map and show info for it
 function findThisClient(macAddress) {
-    if($('.img2nd_Floor').css('display') == 'none' && $('.img3rd_Floor').css('display') == 'none') {
-        imageRequest('1st_Floor', macAddress);
-    } else if ($('.img1st_Floor').css('display') == 'none' && $('.img3rd_Floor').css('display') == 'none') {
-        imageRequest('2nd_Floor', macAddress);
-    } else if ($('.img1st_Floor').css('display') == 'none' && $('.img2nd_Floor').css('display') == 'none') {
-        imageRequest('3rd_Floor', macAddress);
+    if($('.img2nd_Floor').css('display') === 'none' && $('.img3rd_Floor').css('display') === 'none') {
+        console.log('1st_Floor: ' + macAddress);
+        // imageRequest('1st_Floor', macAddress);
+    } else if ($('.img1st_Floor').css('display') === 'none' && $('.img3rd_Floor').css('display') === 'none') {
+        // imageRequest('2nd_Floor', macAddress);
+        console.log('2nd_Floor: ' + macAddress);
+    } else if ($('.img1st_Floor').css('display') === 'none' && $('.img2nd_Floor').css('display') === 'none') {
+        // imageRequest('3rd_Floor', macAddress);
+        console.log('3rd_Floor: ' + macAddress);
     }
     getClientInfo(macAddress);
 }
@@ -145,7 +148,9 @@ function getClientInfo(macAddress) {
             $("#bytesSent").html(data[0].bytesSent);
             $("#bytesReceived").html(data[0].bytesReceived);
 
-            if (data[0].mapInfo.mapHierarchyString.indexOf('1st_Floor')) {
+
+            if (data[0].mapInfo.mapHierarchyString.indexOf('1st_Floor') !== -1) {
+
                 $(".img1st_Floor").show();
                 $(".img2nd_Floor").hide();
                 $(".img3rd_Floor").hide();
@@ -157,11 +162,27 @@ function getClientInfo(macAddress) {
                 imageRequest('1st_Floor', data[0].macAddress);
                 //
             }
-            else if (data[0].mapInfo.mapHierarchyString.indexOf('2nd_Floor')){
+            else if (data[0].mapInfo.mapHierarchyString.indexOf('2nd_Floor') !== -1){
+                $(".img1st_Floor").hide();
+                $(".img2nd_Floor").show();
+                $(".img3rd_Floor").hide();
 
+                $(".img1st_Floor").html("");
+                $(".img2nd_Floor").html("");
+                $(".img3rd_Floor").html("");
+
+                imageRequest('2nd_Floor', data[0].macAddress);
             }
-            else if (data[0].mapInfo.mapHierarchyString.indexOf('3rd_Floor')) {
+            else if (data[0].mapInfo.mapHierarchyString.indexOf('3rd_Floor') !== -1) {
+                $(".img1st_Floor").hide();
+                $(".img2nd_Floor").hide();
+                $(".img3rd_Floor").show();
 
+                $(".img1st_Floor").html("");
+                $(".img2nd_Floor").html("");
+                $(".img3rd_Floor").html("");
+
+                imageRequest('3rd_Floor', data[0].macAddress);
             }
 
         }
