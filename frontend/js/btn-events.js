@@ -65,10 +65,6 @@ $('#3rd_Floor_btn').on('click', function () {
 
 });
 
-$('circle').on('click', function () {
-
-});
-
 
 $('#presence_btn').on('click', function () {
     $("#active_user_count").hide();

@@ -83,7 +83,6 @@ function drawCircle(floorName, macAddress) {
 
                         // draw only one circle
                         if (data[key].macAddress.indexOf(macAddress) !== -1) {
-                            console.log("here");
                             $('.img'+floorName).append(
                                 "<svg height='10' width='10' >"
                                 + "<circle cx='" + data[key].mapCoordinate.x
@@ -98,7 +97,7 @@ function drawCircle(floorName, macAddress) {
                             "<svg height='10' width='10'>"
                             + "<circle id='"+data[key].macAddress+"' cx='" + data[key].mapCoordinate.x
                             + "' cy='" + data[key].mapCoordinate.y
-                            + "' r='7' stroke-width='3' stroke='black' fill='red' onclick='console.log($(this).attr(\"id\"))'>"
+                            + "' r='7' stroke-width='3' stroke='black' fill='red' onclick='findThisClient($(this).attr(\"id\"))'>"
                             + "<title>" + data[key].macAddress + "</title>"
                             + "</circle></svg>"
                         );
@@ -110,14 +109,25 @@ function drawCircle(floorName, macAddress) {
         }
     );
 
+}
 
-
+// draw one circle on click on map
+function findThisClient(macAddress) {
+    if($('.img2nd_Floor').css('display') == 'none' && $('.img3rd_Floor').css('display') == 'none') {
+        imageRequest('1st_Floor', macAddress);
+    } else if ($('.img1st_Floor').css('display') == 'none' && $('.img3rd_Floor').css('display') == 'none') {
+        imageRequest('2nd_Floor', macAddress);
+    } else if ($('.img1st_Floor').css('display') == 'none' && $('.img2nd_Floor').css('display') == 'none') {
+        imageRequest('3rd_Floor', macAddress);
+    }
+    getClientInfo(macAddress);
 }
 
 // get client info
-function getClientInfo() {
+function getClientInfo(macAddress) {
 
-    macAddress = $("#macAddressInput").val();
+    if (macAddress === null)
+        macAddress = $("#macAddressInput").val();
     sendRequest(
         'https://cisco-cmx.unit.ua/api/location/v2/clients?macAddress='+macAddress,
         password,
