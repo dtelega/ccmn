@@ -81,7 +81,7 @@ function drawCircle(floorName, macAddress) {
                 if (data[key].mapInfo.mapHierarchyString.indexOf(floorName) !== -1) {
                     if (macAddress === data[key].macAddress) {
 
-                        // draw only one circle
+                        // draw one big circle
                         if (data[key].macAddress.indexOf(macAddress) !== -1) {
                             $('.img'+floorName).append(
                                 "<svg height='10' width='10' >"
@@ -129,6 +129,7 @@ function findThisClient(macAddress) {
 // get client info
 function getClientInfo(macAddress) {
 
+    $('#findMapClient').show();
     if (macAddress === null)
         macAddress = $("#macAddressInput").val();
     sendRequest(

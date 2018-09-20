@@ -12,12 +12,9 @@ $('#active_user_count_btn').on('click', function () {
 $('#1st_Floor_btn').on('click', function () {
     imageRequest('1st_Floor', null);
 
-
-
     $(".img1st_Floor").show();
     $(".img2nd_Floor").hide();
     $(".img3rd_Floor").hide();
-
 
     $("#active_user_count").hide();
     $("#floor_map").show();
@@ -28,6 +25,8 @@ $('#1st_Floor_btn').on('click', function () {
     // del svg
     $(".img2nd_Floor").html("");
     $(".img3rd_Floor").html("");
+
+    $('#findMapClient').hide();
 
 });
 $('#2nd_Floor_btn').on('click', function () {
@@ -44,8 +43,9 @@ $('#2nd_Floor_btn').on('click', function () {
     $("#kpi").hide();
 
     $(".img1st_Floor").html("");
-
     $(".img3rd_Floor").html("");
+
+    $('#findMapClient').hide();
 
 });
 $('#3rd_Floor_btn').on('click', function () {
@@ -63,6 +63,7 @@ $('#3rd_Floor_btn').on('click', function () {
     $(".img1st_Floor").html("");
     $(".img2nd_Floor").html("");
 
+    $('#findMapClient').hide();
 });
 
 
