@@ -190,8 +190,6 @@ function getClientInfo(macAddress) {
     )
 }
 
-
-
 //    get correlation hourly
 function chartDrawType() {
     var hourlyCountUrl = 'https://cisco-presence.unit.ua/api/presence/v1/';
@@ -214,7 +212,7 @@ function chartDrawType() {
         function (data) {
             google.charts.setOnLoadCallback(function () {
                 if ($("#apiTypeHourly").val() === "dwell/" && type !=="hourly/3days" ) {
-                    drawHorlyGraphDwell(data, type,
+                    drawHorlyGraphDwell(data, 'chart_div2', type,
                         'FIVE_TO_THIRTY_MINUTES',
                         'THIRTY_TO_SIXTY_MINUTES',
                         'ONE_TO_FIVE_HOURS',
@@ -223,7 +221,7 @@ function chartDrawType() {
                 } else if ($("#apiTypeHourly").val() === "dwell/" || $("#apiTypeHourly").val() === "repeatvisitors/" && type ==="hourly/3days" ) {
                     alert("Sry ;( not available now");
                 } else if ($("#apiTypeHourly").val() === "repeatvisitors/") {
-                    drawHorlyGraphDwell(data, type,
+                    drawHorlyGraphDwell(data, 'chart_div2', type,
                         'DAILY',
                         'WEEKLY',
                         'OCCASIONAL',
@@ -237,7 +235,6 @@ function chartDrawType() {
         }
     );
 }
-
 
 //    get request for Analitics and presence
 function getOneValueVisitorsInfo() {
@@ -269,6 +266,13 @@ function getOneValueVisitorsInfo() {
                 $("#repeatVisitorsInfoOccas").html("OCCASIONAL: "+data.OCCASIONAL);
                 $("#repeatVisitorsInfoFirst").html("FIRST_TIME: "+data.FIRST_TIME);
                 $("#repeatVisitorsInfoYesterday").html("YESTERDAY: "+data.YESTERDAY);
+
+                drawPresence(data, 'chart_div_analitic', apiType,
+                    'DAILY',
+                    'WEEKLY',
+                    'OCCASIONAL',
+                    'FIRST_TIME',
+                    'YESTERDAY');
             }
             else if (apiType === "dwell/") {
                 $("#repeatVisitorsInfoDaily").html("FIVE_TO_THIRTY_MINUTES: "+data.FIVE_TO_THIRTY_MINUTES);
@@ -276,6 +280,14 @@ function getOneValueVisitorsInfo() {
                 $("#repeatVisitorsInfoOccas").html("ONE_TO_FIVE_HOURS: "+data.ONE_TO_FIVE_HOURS);
                 $("#repeatVisitorsInfoFirst").html("FIVE_TO_EIGHT_HOURS: "+data.FIVE_TO_EIGHT_HOURS);
                 $("#repeatVisitorsInfoYesterday").html("EIGHT_PLUS_HOURS: "+data.EIGHT_PLUS_HOURS);
+
+                drawPresence(data, 'chart_div_analitic', apiType,
+                    'FIVE_TO_THIRTY_MINUTES',
+                    'THIRTY_TO_SIXTY_MINUTES',
+                    'ONE_TO_FIVE_HOURS',
+                    'FIVE_TO_EIGHT_HOURS',
+                    'EIGHT_PLUS_HOURS');
+
             }
             else  {
                 $("#oneValueVisitorsInfo").html(data);

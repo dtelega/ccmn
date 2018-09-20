@@ -37,6 +37,35 @@ function drawChartTotalUsers(data) {
     chart.draw(chartData, options);
 }
 
+// analitic and presence
+function drawPresence(data, path, title, first, sec, third, fourth, fifth) {
+    console.log(data);
+
+    // Create the data table.
+    var chartData = new google.visualization.DataTable();
+    chartData.addColumn('string', 'text1');
+    chartData.addColumn('number', 'number1');
+
+
+    chartData.addRow([first, data[first]]);
+    chartData.addRow([sec, data[sec]]);
+    chartData.addRow([third, data[third]]);
+    chartData.addRow([fourth, data[fourth]]);
+    chartData.addRow([fifth, data[fifth]]);
+
+
+    // Set chart options
+    var options = {
+        'title': title,
+        'width': 1200,
+        'height': 600
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById(path));
+    chart.draw(chartData, options);
+}
+
 // correlation
 function drawHourlyGraph(data, type, path) {
     console.log(data);
@@ -85,7 +114,7 @@ function drawHourlyGraph(data, type, path) {
 
 }
 
-function drawHorlyGraphDwell(data, type, first, sec, third, fourth, fifth) {
+function drawHorlyGraphDwell(data, path, type, first, sec, third, fourth, fifth) {
     console.log(data);
     console.log(type);
 
@@ -130,10 +159,9 @@ function drawHorlyGraphDwell(data, type, first, sec, third, fourth, fifth) {
         }
     };
 
-    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+    var chart = new google.visualization.ColumnChart(document.getElementById(path));
     chart.draw(chartData, options);
 }
-
 
 function drawHorlyThreeDays(data, type) {
 
@@ -203,7 +231,7 @@ function drawTotalKpi(data, title) {
     var options = {
         'title': title,
         'width': 800,
-        'height': 300,
+        'height': 300
     };
 
     // Instantiate and draw our chart, passing in some options.
