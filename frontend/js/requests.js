@@ -199,7 +199,7 @@ function chartDrawType() {
 
     if (type === "hourly") {
         hourlyCountUrl += "&date=";
-        hourlyCountUrl += $("#dravHourlyDate").val();
+        hourlyCountUrl += $("#dravHourlyDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
     }
 
     console.log(hourlyCountUrl);
@@ -245,13 +245,13 @@ function getOneValueVisitorsInfo() {
     requestUrl += apiType + type + "?siteId="+siteid;
     if (type === "count") {
         requestUrl += "&date=";
-        requestUrl += $("#oneValueDate").val();
+        requestUrl += $("#oneValueDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
     }
     if (type === "total") {
         requestUrl += "&startDate=";
-        requestUrl += $("#oneValueStartDate").val();
+        requestUrl += $("#oneValueStartDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
         requestUrl += "&endDate=";
-        requestUrl += $("#oneValueEndDate").val();
+        requestUrl += $("#oneValueEndDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
     }
     console.log(requestUrl);
     sendRequest(
@@ -304,13 +304,13 @@ function kpisummary() {
 
     requestUrl += type + "?siteId="+siteid;
     if (type === "kpisummary") {
-        console.log($("#kpi-input-date").val());
+        console.log($("#kpi-input-date").datepicker({ dateFormat: 'yy-mm-dd' }).val());
 
         if ($("#kpi-input-date").val())
-            requestUrl += "&date=" + $("#kpi-input-date").val();
+            requestUrl += "&date=" + $("#kpi-input-date").datepicker({ dateFormat: 'yy-mm-dd' }).val();
         else {
-            requestUrl += "&startDate=" + $("#kpi-input-startDate").val();
-            requestUrl += "&endDate=" + $("#kpi-input-endDate").val();
+            requestUrl += "&startDate=" + $("#kpi-input-startDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
+            requestUrl += "&endDate=" + $("#kpi-input-endDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
         }
     }
     // if (type === "count") {
@@ -360,8 +360,6 @@ function kpisummary() {
         }
     );
 }
-
-
 
 
 // }

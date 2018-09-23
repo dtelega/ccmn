@@ -30,6 +30,13 @@ password2 = 'Passw0rd';
 
 
 
+$("#oneValueDate").datepicker({ dateFormat: 'yy-mm-dd' });
+$("#oneValueStartDate").datepicker({ dateFormat: 'yy-mm-dd' });
+$("#oneValueEndDate").datepicker({ dateFormat: 'yy-mm-dd' });
+$("#dravHourlyDate").datepicker({ dateFormat: 'yy-mm-dd' });
+$("#kpi-input-date").datepicker({ dateFormat: 'yy-mm-dd' });
+$("#kpi-input-startDate").datepicker({ dateFormat: 'yy-mm-dd' });
+$("#kpi-input-endDate").datepicker({ dateFormat: 'yy-mm-dd' });
 
 // $( document ).ajaxSend(function( event, jqxhr, settings ) {
 //     console.log(settings);
