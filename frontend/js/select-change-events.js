@@ -42,10 +42,18 @@ $("#oneValueHourly").change(function () {
 
     if (type === "hourly") {
         $("#dravHourlyDate").show();
-    }
-    else {
+        $('#dravHourlyStartDate').hide();
+        $('#dravHourlyEndDate').hide();
+    } else if (type === 'daily') {
+       $('#dravHourlyStartDate').show();
+       $('#dravHourlyEndDate').show();
         $("#dravHourlyDate").hide();
+    } else {
+        $("#dravHourlyDate").hide();
+        $('#dravHourlyStartDate').hide();
+        $('#dravHourlyEndDate').hide();
     }
+
 });
 
 $("#kpi-select").change(function () {

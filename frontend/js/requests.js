@@ -197,11 +197,21 @@ function chartDrawType() {
     var apiType = document.getElementById("apiTypeHourly").value.replace('\”', '').replace('\”', '');
     hourlyCountUrl += apiType + type+"?siteId="+siteid;
 
+    var date2;
+    var date1 = null;
     if (type === "hourly") {
         hourlyCountUrl += "&date=";
+        date1 = Math.round((new Date($("#dravHourlyDate").datepicker().val()).getTime()) / 1000);
         hourlyCountUrl += $("#dravHourlyDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
+    } else if (type === 'daily') {
+        date1 = Math.round((new Date($("#dravHourlyStartDate").datepicker().val()).getTime()) / 1000);
+        date2 = Math.round((new Date($("#dravHourlyEndDate").datepicker().val()).getTime()) / 1000);
+        hourlyCountUrl += "&startDate=" + $("#dravHourlyStartDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
+        hourlyCountUrl += "&endDate" + $("#dravHourlyEndDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
     }
 
+    if (!correctDate(date1, date2))
+        return;
     console.log(hourlyCountUrl);
 
     sendRequest(
@@ -242,17 +252,25 @@ function getOneValueVisitorsInfo() {
     var apiType = $("#apiType").val();
     var type = document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '');
 
+    var date1 = null;
+    var date2 = null;
     requestUrl += apiType + type + "?siteId="+siteid;
     if (type === "count") {
         requestUrl += "&date=";
+        date1 = Math.round((new Date($("#oneValueDate").datepicker().val()).getTime()) / 1000);
         requestUrl += $("#oneValueDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
     }
     if (type === "total") {
+        date1 = Math.round((new Date($("#oneValueStartDate").datepicker().val()).getTime()) / 1000);
+        date2 = Math.round((new Date($("#oneValueEndDate").datepicker().val()).getTime()) / 1000);
+
         requestUrl += "&startDate=";
         requestUrl += $("#oneValueStartDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
         requestUrl += "&endDate=";
         requestUrl += $("#oneValueEndDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
     }
+    if (!correctDate(date1, date2))
+        return;
     console.log(requestUrl);
     sendRequest(
         requestUrl,
@@ -296,7 +314,6 @@ function getOneValueVisitorsInfo() {
     );
 }
 
-
 //  get request for KPI
 function kpisummary() {
     var requestUrl = "https://cisco-presence.unit.ua/api/presence/v1/";
@@ -305,24 +322,22 @@ function kpisummary() {
     requestUrl += type + "?siteId="+siteid;
     if (type === "kpisummary") {
         console.log($("#kpi-input-date").datepicker({ dateFormat: 'yy-mm-dd' }).val());
-
-        if ($("#kpi-input-date").val())
-            requestUrl += "&date=" + $("#kpi-input-date").datepicker({ dateFormat: 'yy-mm-dd' }).val();
-        else {
+        var date1 = null;
+        var date2 = null;
+        if ($("#kpi-input-date").val()) {
+            requestUrl += "&date=" + $("#kpi-input-date").datepicker({dateFormat: 'yy-mm-dd'}).val();
+            date1 = Math.round((new Date($("#kpi-input-date").datepicker().val()).getTime()) / 1000);
+        } else {
+            date1 = Math.round((new Date($("#kpi-input-startDate").datepicker().val()).getTime()) / 1000);
+            date2 = Math.round((new Date($("#kpi-input-endDate").datepicker().val()).getTime()) / 1000);
             requestUrl += "&startDate=" + $("#kpi-input-startDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
             requestUrl += "&endDate=" + $("#kpi-input-endDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
         }
+
+        if (!correctDate(date1, date2))
+            return;
     }
-    // if (type === "count") {
-    //     requestUrl += "&date=";
-    //     requestUrl += $("#oneValueDate").val();
-    // }
-    // if (type === "total") {
-    //     requestUrl += "&startDate=";
-    //     requestUrl += $("#oneValueStartDate").val();
-    //     requestUrl += "&endDate=";
-    //     requestUrl += $("#oneValueEndDate").val();
-    // }
+
     console.log(requestUrl);
     sendRequest(
         requestUrl,
@@ -362,7 +377,58 @@ function kpisummary() {
 }
 
 
+
+startLogHistoryCheck();
+
 // }
+
+function startLogHistoryCheck() {
+    setTimeout(
+        function () {
+
+            sendRequest(
+                'https://cisco-cmx.unit.ua/api/location/v2/clients',
+                password,
+                'GET',
+                null,
+                function (data) {
+                    let newUsers = new Map();
+                    if (currentUsers === null) {
+                        currentUsers = new Map();
+                        data.forEach(function (t) {
+                            newUsers.set(t.macAddress, t.mapInfo.mapHierarchyString);
+                        });
+                    } else {
+                        data.forEach(function (t) {
+                            var macAddress = t.macAddress;
+                            var currentFloor = t.mapInfo.mapHierarchyString;
+                            var prevFloor = currentUsers.get(t.macAddress);
+                            if (!currentUsers.has(macAddress)) {
+                                console.log("Hi new user "+ macAddress + " on " + currentFloor);
+                                $("#log-history").append(getCurrentTime()+">Hi new user "+ macAddress + " on " + shortFloor(currentFloor)+"!\n");
+                            } else if (prevFloor !== currentFloor) {
+                                console.log("User " + macAddress + " changed floor from " + shortFloor(prevFloor) + " to " + shortFloor(currentFloor));
+                                $("#log-history").append(getCurrentTime()+">User " + macAddress + " changed floor from " + shortFloor(prevFloor) + " to " + shortFloor(currentFloor) + '\n');
+                            }
+                            newUsers.set(t.macAddress, t.mapInfo.mapHierarchyString);
+                        });
+                    }
+
+                    for (var k of currentUsers.keys()) {
+                        if (!newUsers.has(k)) {
+                            console.log("User " + k + " has logout");
+                            $("#log-history").append(getCurrentTime()+">User " + k + " has logout\n");
+                        }
+                    }
+                    currentUsers = newUsers;
+                    $('#log-history').scrollTop( $('#log-history')[0].scrollHeight - $('#log-history').height());
+                }
+            );
+            startLogHistoryCheck();
+        },
+        5000
+    );
+};// todo change to 10 second
 
 
 // main func for ajax requests
