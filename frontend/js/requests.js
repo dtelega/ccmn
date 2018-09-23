@@ -140,6 +140,11 @@ function getClientInfo(macAddress) {
         function (data) {
             console.log('https://cisco-cmx.unit.ua/api/location/v2/clients?macAddress='+macAddress);
             console.log(data);
+            if (data === undefined){
+                alert('MacAddress does not exist!');
+                return;
+            }
+
             $("#floorMacAddress").html(data[0].macAddress);
             $("#mapHierarchyString").html(data[0].mapInfo.mapHierarchyString);
             $("#firstLocatedTime").html(data[0].statistics.firstLocatedTime);
@@ -207,7 +212,7 @@ function chartDrawType() {
         date1 = Math.round((new Date($("#dravHourlyStartDate").datepicker().val()).getTime()) / 1000);
         date2 = Math.round((new Date($("#dravHourlyEndDate").datepicker().val()).getTime()) / 1000);
         hourlyCountUrl += "&startDate=" + $("#dravHourlyStartDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
-        hourlyCountUrl += "&endDate" + $("#dravHourlyEndDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
+        hourlyCountUrl += "&endDate=" + $("#dravHourlyEndDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
     }
 
     if (!correctDate(date1, date2))
@@ -221,14 +226,14 @@ function chartDrawType() {
         null,
         function (data) {
             google.charts.setOnLoadCallback(function () {
-                if ($("#apiTypeHourly").val() === "dwell/" && type !=="hourly/3days" ) {
+                if ($("#apiTypeHourly").val() === "dwell/" && type !=="hourly/3days" && type !== 'daily') {
                     drawHorlyGraphDwell(data, 'chart_div2', type,
                         'FIVE_TO_THIRTY_MINUTES',
                         'THIRTY_TO_SIXTY_MINUTES',
                         'ONE_TO_FIVE_HOURS',
                         'FIVE_TO_EIGHT_HOURS',
                         'EIGHT_PLUS_HOURS');
-                } else if ($("#apiTypeHourly").val() === "dwell/" || $("#apiTypeHourly").val() === "repeatvisitors/" && type ==="hourly/3days" ) {
+                } else if (($("#apiTypeHourly").val() === "dwell/" || $("#apiTypeHourly").val() === "repeatvisitors/") && type ==="hourly/3days" ) {
                     alert("Sry ;( not available now");
                 } else if ($("#apiTypeHourly").val() === "repeatvisitors/") {
                     drawHorlyGraphDwell(data, 'chart_div2', type,
@@ -239,8 +244,12 @@ function chartDrawType() {
                         'YESTERDAY');
                 } else if (type === "hourly/3days") {
                     drawHorlyThreeDays(data, type);
-                } else
+                } else if (type === "daily"){
+                    drawDaily(data, type, 'chart_div2');
+                } else {
                     drawHourlyGraph(data, type, 'chart_div2');
+                }
+
             });
         }
     );
@@ -376,8 +385,6 @@ function kpisummary() {
     );
 }
 
-
-
 startLogHistoryCheck();
 
 // }
@@ -404,10 +411,10 @@ function startLogHistoryCheck() {
                             var currentFloor = t.mapInfo.mapHierarchyString;
                             var prevFloor = currentUsers.get(t.macAddress);
                             if (!currentUsers.has(macAddress)) {
-                                console.log("Hi new user "+ macAddress + " on " + currentFloor);
+                                // console.log("Hi new user "+ macAddress + " on " + currentFloor);
                                 $("#log-history").append(getCurrentTime()+">Hi new user "+ macAddress + " on " + shortFloor(currentFloor)+"!\n");
                             } else if (prevFloor !== currentFloor) {
-                                console.log("User " + macAddress + " changed floor from " + shortFloor(prevFloor) + " to " + shortFloor(currentFloor));
+                                // console.log("User " + macAddress + " changed floor from " + shortFloor(prevFloor) + " to " + shortFloor(currentFloor));
                                 $("#log-history").append(getCurrentTime()+">User " + macAddress + " changed floor from " + shortFloor(prevFloor) + " to " + shortFloor(currentFloor) + '\n');
                             }
                             newUsers.set(t.macAddress, t.mapInfo.mapHierarchyString);
@@ -416,7 +423,7 @@ function startLogHistoryCheck() {
 
                     for (var k of currentUsers.keys()) {
                         if (!newUsers.has(k)) {
-                            console.log("User " + k + " has logout");
+                            // console.log("User " + k + " has logout");
                             $("#log-history").append(getCurrentTime()+">User " + k + " has logout\n");
                         }
                     }

@@ -43,9 +43,6 @@ $("#dravHourlyStartDate").datepicker(dateoptions);
 $("#dravHourlyEndDate").datepicker(dateoptions);
 
 
-var textArea = $('#log-history');
-textArea.scrollTop( textArea[0].scrollHeight - textArea.height()   );
-
 function getCurrentTime() {
     var date = new Date;
     var seconds = date.getSeconds();

@@ -115,8 +115,6 @@ function drawHourlyGraph(data, type, path) {
 }
 
 function drawHorlyGraphDwell(data, path, type, first, sec, third, fourth, fifth) {
-    console.log(data);
-    console.log(type);
 
     var chartData = new google.visualization.DataTable();
     chartData.addColumn('timeofday', 'Time of Day');
@@ -207,6 +205,59 @@ function drawHorlyThreeDays(data, type) {
 
 function drawHorlyGraphDwellThreeDays(data, type, first, sec, third, fourth, fifth) {
     // TODO
+}
+
+function drawDaily(data, type, path) {
+    console.log(data);
+
+
+    // google.charts.load('current', {'packages':['corechart']});
+    // google.charts.setOnLoadCallback(drawChart);
+
+
+        var chartData = new google.visualization.DataTable();
+        chartData.addColumn('string', 'Time of Day');
+        chartData.addColumn('number', 'Rating');
+
+
+        $.each(data, function(key){
+            chartData.addRow([key, data[key]]);
+        });
+
+
+        var options = {
+            title: 'Count of visitors for specified date range ',
+            width: 1500,
+            height: 700,
+            hAxis: {
+                format: 'yy/m/d',
+                gridlines: {count: 15}
+            },
+            vAxis: {
+                gridlines: {color: 'none'},
+                minValue: 0
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById(path));
+
+        chart.draw(chartData, options);
+
+        // var button = document.getElementById('change');
+        //
+        // button.onclick = function () {
+        //
+        //     // If the format option matches, change it to the new option,
+        //     // if not, reset it to the original format.
+        //     options.hAxis.format === 'M/d/yy' ?
+        //         options.hAxis.format = 'MMM dd, yyyy' :
+        //         options.hAxis.format = 'M/d/yy';
+        //
+        //     chart.draw(chartData, options);
+        // };
+
+
+
 }
 
 // averageDwellByLevels KPI
