@@ -235,7 +235,7 @@ function chartDrawType() {
                         'EIGHT_PLUS_HOURS');
                 } else if (($("#apiTypeHourly").val() === "dwell/" || $("#apiTypeHourly").val() === "repeatvisitors/") && type ==="hourly/3days" ) {
                     alert("Sry ;( not available now");
-                } else if ($("#apiTypeHourly").val() === "repeatvisitors/") {
+                } else if ($("#apiTypeHourly").val() === "repeatvisitors/" && type !== 'daily') {
                     drawHorlyGraphDwell(data, 'chart_div2', type,
                         'DAILY',
                         'WEEKLY',
@@ -245,7 +245,7 @@ function chartDrawType() {
                 } else if (type === "hourly/3days") {
                     drawHorlyThreeDays(data, type);
                 } else if (type === "daily"){
-                    drawDaily(data, type, 'chart_div2');
+                    drawDaily(data, $("#apiTypeHourly").val(), 'chart_div2');
                 } else {
                     drawHourlyGraph(data, type, 'chart_div2');
                 }

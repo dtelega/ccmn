@@ -217,16 +217,49 @@ function drawDaily(data, type, path) {
 
         var chartData = new google.visualization.DataTable();
         chartData.addColumn('string', 'Time of Day');
-        chartData.addColumn('number', 'Rating');
 
+        console.log("type = " + type);
+        if (type === 'dwell/' || type === 'repeatvisitors/'){
 
-        $.each(data, function(key){
-            chartData.addRow([key, data[key]]);
-        });
+            $.each(data, function (key) {
+                // chartData.addRow([key, data[key]]);
+                console.log(data[key]);
+                $.each(data[key], function (k) {
+                    chartData.addColumn('number', k);
+                    console.log(k);
+                });
+                return false;
+            });
+            if (type === 'dwell/') {
+                $.each(data, function (key) {
+                    chartData.addRow([key, data[key].FIVE_TO_THIRTY_MINUTES,
+                        data[key].THIRTY_TO_SIXTY_MINUTES,
+                        data[key].ONE_TO_FIVE_HOURS,
+                        data[key].FIVE_TO_EIGHT_HOURS,
+                        data[key].EIGHT_PLUS_HOURS
+                    ]);
+                });
+            } else {
+                $.each(data, function (key) {
+                    chartData.addRow([key,
+                        data[key].FIRST_TIME,
+                        data[key].YESTERDAY,
+                        data[key].DAILY,
+                        data[key].WEEKLY,
+                        data[key].OCCASIONAL
+                    ]);
+                });
+            }
+        } else {
+            chartData.addColumn('number', 'Rating');
+            $.each(data, function (key) {
+                chartData.addRow([key, data[key]]);
+            });
+        }
 
 
         var options = {
-            title: 'Count of visitors for specified date range ',
+            title: 'Count for specified date range ',
             width: 1500,
             height: 700,
             hAxis: {
@@ -243,18 +276,6 @@ function drawDaily(data, type, path) {
 
         chart.draw(chartData, options);
 
-        // var button = document.getElementById('change');
-        //
-        // button.onclick = function () {
-        //
-        //     // If the format option matches, change it to the new option,
-        //     // if not, reset it to the original format.
-        //     options.hAxis.format === 'M/d/yy' ?
-        //         options.hAxis.format = 'MMM dd, yyyy' :
-        //         options.hAxis.format = 'M/d/yy';
-        //
-        //     chart.draw(chartData, options);
-        // };
 
 
 
