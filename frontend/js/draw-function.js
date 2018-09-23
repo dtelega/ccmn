@@ -68,7 +68,7 @@ function drawPresence(data, path, title, first, sec, third, fourth, fifth) {
 
 // correlation
 function drawHourlyGraph(data, type, path) {
-    console.log(data);
+    // console.log(data);
 
     var chartData = new google.visualization.DataTable();
     chartData.addColumn('timeofday', 'Time of Day');
@@ -171,7 +171,7 @@ function drawHorlyThreeDays(data, type) {
         keys.push(key);
     });
 
-    console.log(keys);
+    // console.log(keys);
     for (var i = 0; i < 24; i++) {
         chartData.addRow(
             [{v: [i, 0, 0], f: i+""},
@@ -208,25 +208,19 @@ function drawHorlyGraphDwellThreeDays(data, type, first, sec, third, fourth, fif
 }
 
 function drawDaily(data, type, path) {
-    console.log(data);
-
-
-    // google.charts.load('current', {'packages':['corechart']});
-    // google.charts.setOnLoadCallback(drawChart);
-
 
         var chartData = new google.visualization.DataTable();
         chartData.addColumn('string', 'Time of Day');
 
-        console.log("type = " + type);
+        // console.log("type = " + type);
         if (type === 'dwell/' || type === 'repeatvisitors/'){
 
             $.each(data, function (key) {
                 // chartData.addRow([key, data[key]]);
-                console.log(data[key]);
+                // console.log(data[key]);
                 $.each(data[key], function (k) {
                     chartData.addColumn('number', k);
-                    console.log(k);
+                    // console.log(k);
                 });
                 return false;
             });
@@ -283,14 +277,11 @@ function drawDaily(data, type, path) {
 
 // averageDwellByLevels KPI
 function drawTotalKpi(data, title) {
-    console.log(data);
 
-    console.log(data.averageDwellByLevels.FIVE_TO_THIRTY_MINUTES[title]);
     // Create the data table.
     var chartData = new google.visualization.DataTable();
     chartData.addColumn('string', 'Floor');
     chartData.addColumn('number', 'UserCount');
-
 
     chartData.addRow(['FIVE_TO_THIRTY_MINUTES', data.averageDwellByLevels.FIVE_TO_THIRTY_MINUTES[title]]);
     chartData.addRow(['THIRTY_TO_SIXTY_MINUTES', data.averageDwellByLevels.THIRTY_TO_SIXTY_MINUTES[title]]);
@@ -313,17 +304,15 @@ function drawTotalKpi(data, title) {
 
 // total manufact kpi
 function drawTotalManufact(data) {
-    console.log(data);
     // Create the data table.
     var chartData = new google.visualization.DataTable();
     chartData.addColumn('string', 'Manufacturers');
     chartData.addColumn('number', 'count');
 
-    console.log(data.topManufacturers.manufacturerCounts);
+    // console.log(data.topManufacturers.manufacturerCounts);
 
     $.each(data.topManufacturers.manufacturerCounts, function(key){
-        console.log(key, data.topManufacturers.manufacturerCounts[key]);
-
+        // console.log(key, data.topManufacturers.manufacturerCounts[key]);
         chartData.addRow([key, data.topManufacturers.manufacturerCounts[key]]);
     });
 

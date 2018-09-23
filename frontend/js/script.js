@@ -51,6 +51,7 @@ function getCurrentTime() {
 
     return (hour+":"+minutes+":"+seconds);
 }
+
 function shortFloor(full) {
     if (full.indexOf('1') !== -1) {
         return "1st_Floor";

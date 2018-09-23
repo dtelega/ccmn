@@ -219,3 +219,47 @@ svg:hover {
     background: #D6E4BE;
     color: #000;
 }
+
+/*authors*/
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-github {
+    background: #2c4762;
+    color: white;
+}
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+
+.portfolio-card {
+    margin: 10px;
+    padding: 5px;
+}
+
+.portfolio-card .authors-header {
+
+}
+
+.portfolio-card img {
+    width: 200px;
+}
+
+.portfolio-card .name {
+    padding: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+

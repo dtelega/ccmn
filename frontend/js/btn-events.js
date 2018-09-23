@@ -6,6 +6,7 @@ $('#active_user_count_btn').on('click', function () {
     $("#presence").hide();
     $("#correlation").hide();
     $("#kpi").hide();
+    $("#authors").hide();
 
 });
 
@@ -21,6 +22,7 @@ $('#1st_Floor_btn').on('click', function () {
     $("#presence").hide();
     $("#correlation").hide();
     $("#kpi").hide();
+    $("#authors").hide();
 
     // del svg
     $(".img2nd_Floor").html("");
@@ -41,6 +43,7 @@ $('#2nd_Floor_btn').on('click', function () {
     $("#presence").hide();
     $("#correlation").hide();
     $("#kpi").hide();
+    $("#authors").hide();
 
     $(".img1st_Floor").html("");
     $(".img3rd_Floor").html("");
@@ -59,6 +62,7 @@ $('#3rd_Floor_btn').on('click', function () {
     $("#presence").hide();
     $("#correlation").hide();
     $("#kpi").hide();
+    $("#authors").hide();
 
     $(".img1st_Floor").html("");
     $(".img2nd_Floor").html("");
@@ -73,6 +77,7 @@ $('#presence_btn').on('click', function () {
     $("#presence").show();
     $("#correlation").hide();
     $("#kpi").hide();
+    $("#authors").hide();
 });
 
 $('#correlation_btn').on('click', function () {
@@ -81,6 +86,7 @@ $('#correlation_btn').on('click', function () {
     $("#presence").hide();
     $("#correlation").show();
     $("#kpi").hide();
+    $("#authors").hide();
 });
 
 $('#kpi_btn').on('click', function () {
@@ -89,5 +95,6 @@ $('#kpi_btn').on('click', function () {
     $("#presence").hide();
     $("#correlation").hide();
     $("#kpi").show();
+    $("#authors").hide();
     kpisummary();
 });
