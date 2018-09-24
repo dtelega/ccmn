@@ -7,6 +7,7 @@ $('#active_user_count_btn').on('click', function () {
     $("#correlation").hide();
     $("#kpi").hide();
     $("#authors").hide();
+    $('#forecasting').hide();
 
 });
 
@@ -29,7 +30,7 @@ $('#1st_Floor_btn').on('click', function () {
     $(".img3rd_Floor").html("");
 
     $('#findMapClient').hide();
-
+    $('#forecasting').hide();
 });
 $('#2nd_Floor_btn').on('click', function () {
     imageRequest('2nd_Floor', null);
@@ -49,6 +50,7 @@ $('#2nd_Floor_btn').on('click', function () {
     $(".img3rd_Floor").html("");
 
     $('#findMapClient').hide();
+    $('#forecasting').hide();
 
 });
 $('#3rd_Floor_btn').on('click', function () {
@@ -68,6 +70,7 @@ $('#3rd_Floor_btn').on('click', function () {
     $(".img2nd_Floor").html("");
 
     $('#findMapClient').hide();
+    $('#forecasting').hide();
 });
 
 
@@ -78,6 +81,7 @@ $('#presence_btn').on('click', function () {
     $("#correlation").hide();
     $("#kpi").hide();
     $("#authors").hide();
+    $('#forecasting').hide();
 });
 
 $('#correlation_btn').on('click', function () {
@@ -87,6 +91,7 @@ $('#correlation_btn').on('click', function () {
     $("#correlation").show();
     $("#kpi").hide();
     $("#authors").hide();
+    $('#forecasting').hide();
 });
 
 $('#kpi_btn').on('click', function () {
@@ -96,5 +101,16 @@ $('#kpi_btn').on('click', function () {
     $("#correlation").hide();
     $("#kpi").show();
     $("#authors").hide();
+    $('#forecasting').hide();
     kpisummary();
+});
+
+$('#forecasting_btn').on('click', function () {
+    $("#active_user_count").hide();
+    $("#floor_map").hide();
+    $("#presence").hide();
+    $("#correlation").hide();
+    $("#kpi").hide();
+    $("#authors").hide();
+    $('#forecasting').show();
 });

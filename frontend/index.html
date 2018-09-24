@@ -49,9 +49,9 @@
                 <a id="presence_btn" class="nav-link" href="#" onclick="getOneValueVisitorsInfo();">Analytics and
                     Presence</a>
             </li>
-            <!--<li class="nav-item">-->
-            <!--<a class="nav-link" href="#">Forecasting number of visitors</a>-->
-            <!--</li>-->
+            <li class="nav-item">
+                <a id="forecasting_btn" class="nav-link" href="#">Forecasting number of visitors</a>
+            </li>
             <li class="nav-item">
                 <a id="correlation_btn" class="nav-link" href="#" onclick="chartDrawType();">Correlations</a>
             </li>
@@ -84,6 +84,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-9">
+
+
                 <section id="authors">
                     <div class="container">
                         <div class="row text-center">
@@ -244,7 +246,21 @@
                             </div>
                         </div>
                     </div>
-                    <div id="chart_div2" style="height: 1000px"></div>
+                    <div id="chart_div2" style="height: 800px"></div>
+
+                    <div class="container text-center">
+                        <div class="row">
+                            <h2>Construct correlations between session duration and date range</h2>
+                        </div>
+                        <div class="row">
+                            <div class=" col-md-offset-2">
+                                <input id="sessionStartDate" placeholder="start date">
+                                <input id="sessionEndDate" placeholder="end date">
+                                <button onclick="getSessionDuration();" class="btn btn-success">Get this</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chart_div_session" style="height: 1000px"></div>
                 </section>
 
                 <section id="kpi" style="display: none;">
@@ -317,11 +333,34 @@
                     </div>
 
                 </section>
+
+                <section id="forecasting" style="display: none;">
+
+                    <div class="container">
+
+                        <select id="forecasting-select" class="selectpicker" data-style="btn-primary">
+                            <option selected value=”connected”>connected</option>
+                            <option value=”passerby”>passerby</option>
+                            <!--<option value=”repeatvisitors”>repeatvisitors</option>-->
+                            <option value=”visitor”>visitor</option>
+
+                        </select>
+                            <input id="forecastingDate" placeholder="date" style="">
+                            <button onclick="getForecasting();" class="btn btn-success">Get this</button>
+                            <div class="info-block">
+                                <p id="forecastingInfo"></p>
+                            </div>
+
+                    </div>
+
+
+
+                </section>
             </div>
             <div class="col-3">
                 <div class="container text-center">
                     <div class="row">
-                          <textarea disabled id="log-history" style="width: 100%; font-size: 12px"></textarea>
+                          <textarea disabled id="log-history" style="width: 100%; font-size: 12px">Log history:&#10;</textarea>
                     </div>
                 </div>
             </div>

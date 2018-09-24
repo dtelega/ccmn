@@ -202,7 +202,7 @@ function chartDrawType() {
     var apiType = document.getElementById("apiTypeHourly").value.replace('\”', '').replace('\”', '');
     hourlyCountUrl += apiType + type+"?siteId="+siteid;
 
-    var date2;
+    var date2 = null;
     var date1 = null;
     if (type === "hourly") {
         hourlyCountUrl += "&date=";
@@ -437,6 +437,68 @@ function startLogHistoryCheck() {
     );
 };// todo change to 10 second
 
+function getSessionDuration() {
+
+    var date1 = Math.round((new Date($("#sessionStartDate").datepicker().val()).getTime()) / 1000);
+    var date2 = Math.round((new Date($("#sessionEndDate").datepicker().val()).getTime()) / 1000);
+
+    if (!correctDate(date1, date2))
+        return;
+
+    startDate = $("#sessionStartDate").datepicker({ dateFormat: 'yy-mm-dd' }).val()
+    endDate = $("#sessionEndDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
+
+    var dateSet = [];
+    while (Math.round((new Date(startDate).getTime()) / 1000) <= Math.round((new Date(endDate).getTime()) / 1000)) {
+        dateSet.push(startDate);
+        startDate = addOneDay(startDate, 1);
+    }
+    dateLength = dateSet.length;
+
+    $.each(dateSet, function (i, date) {
+
+        sendRequest(
+            'https://cisco-presence.unit.ua/api/presence/v1/dwell/average?siteId='+siteid+'&date='+date,
+            password2,
+            'GET',
+            null,
+            function (data) {
+
+                sessionTimeData[date+''] = data;
+                console.log(sessionTimeData);
+
+            }
+        );
+    });
+    startSessionSetCheck();
+}
+
+function getForecasting() {
+    var forecastingDateSet = [];
+    var date = $('#forecastingDate').datepicker().val();
+
+    for (var days = 7; days <= 7*10; days += 7) {
+        forecastingDateSet.push(addOneDay(date, -days));
+    }
+
+    var type = $('#forecasting-select').val().replace('\”', '').replace('\”', '');
+    console.log(type);
+    $.each(forecastingDateSet, function (i, date) {
+
+        sendRequest(
+            'https://cisco-presence.unit.ua/api/presence/v1/'+type+'/count?siteId='+siteid+'&date='+date, // TODO: connected/repeat/other ....
+            password2,
+            'GET',
+            null,
+            function (data) {
+
+                forecastingData.push(data);
+                console.log(forecastingData);
+            }
+        );
+    });
+    startForecastingSetCheck();
+}
 
 // main func for ajax requests
 function sendRequest(url, pass, type, payload, success) {

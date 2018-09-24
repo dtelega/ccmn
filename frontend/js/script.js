@@ -41,7 +41,19 @@ $("#kpi-input-startDate").datepicker(dateoptions);
 $("#kpi-input-endDate").datepicker(dateoptions);
 $("#dravHourlyStartDate").datepicker(dateoptions);
 $("#dravHourlyEndDate").datepicker(dateoptions);
-
+$("#sessionStartDate").datepicker({
+    dateFormat: 'yy-mm-dd',
+    maxDate: '-1d'
+});
+$("#sessionEndDate").datepicker({
+    dateFormat: 'yy-mm-dd',
+    maxDate: '-1d'
+});
+$("#forecastingDate").datepicker({
+    dateFormat: 'yy-mm-dd',
+    maxDate: '7d',
+    minDate: '1d'
+});
 
 function getCurrentTime() {
     var date = new Date;
@@ -63,7 +75,7 @@ function shortFloor(full) {
 }
 
 function correctDate(date1, date2) {
-    if (isNaN(date1) && isNaN(date2)) {
+    if (isNaN(date1) || isNaN(date2)) {
         alert("Date empty :(");
         return false;
     }
@@ -79,4 +91,70 @@ function correctDate(date1, date2) {
         return false;
     }
     return true;
+}
+
+
+var sessionTimeData = {};
+var dateLength = 0;
+
+var forecastingData = [];
+
+
+function addOneDay(date, days) {
+    var today = new Date(date);
+    date = new Date(today);
+    date.setDate(today.getDate() + days);
+    date.toLocaleDateString();
+    date = (date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
+    return date;
+}
+
+function startSessionSetCheck() {
+    setTimeout(
+        function () {
+            console.log(Object.keys(sessionTimeData).length, dateLength);
+            if (Object.keys(sessionTimeData).length === dateLength) {
+                // order date list for graph
+                const ordered = {};
+                Object.keys(sessionTimeData).sort(function(a, b) {
+                    var date1 = Math.round((new Date(a).getTime()) / 1000);
+                    var date2 = Math.round((new Date(b).getTime()) / 1000);
+                    return date1 - date2;
+
+                }).forEach(function(key) {
+                    ordered[key] = sessionTimeData[key];
+                });
+
+                drawDaily(ordered, null, 'chart_div_session');
+                dateLength = 0;
+                sessionTimeData = {};
+            }
+            else
+                startSessionSetCheck();
+        },
+        1000
+    );
+} // todo change to 10 second
+
+
+function startForecastingSetCheck() {
+    setTimeout(
+        function () {
+            console.log(forecastingData.length, 10);
+            if (forecastingData.length === 10) {
+
+                var num = 0;
+                $.each(forecastingData, function (i, count) {
+                   num += count;
+                });
+
+                num /= 10;
+
+                $('#forecastingInfo').html(num);
+                forecastingData = [];
+            } else
+                startForecastingSetCheck();
+        },
+        1000
+    );
 }
