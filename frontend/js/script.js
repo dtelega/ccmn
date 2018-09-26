@@ -1,4 +1,4 @@
-var siteid; // 1513804707441
+var siteid = null; // 1513804707441
 var username;
 var password;  // cmx
 var password2; // presence
@@ -7,25 +7,18 @@ let currentUsers = null;
 // Credentials func
 function getLogin() {
     username = $('#login').val();
-    console.log('Username ' + username);
+    // console.log('Username ' + username);
 }
 
 function getPasswordCmx() {
     password = $('#password-cmx').val();
-    console.log('Password: ' + password);
+    // console.log('Password: ' + password);
 }
 
 function getPasswordPrecense() {
     password2 = $('#password-precense').val();
-    console.log('Password: ' + password);
+    // console.log('Password: ' + password);
 }
-
-// delete this credentials in prod
-username = 'RO';
-password = 'just4reading';
-password2 = 'Passw0rd';
-// ***********************
-
 
 var dateoptions = {
     dateFormat: 'yy-mm-dd',
@@ -93,12 +86,10 @@ function correctDate(date1, date2) {
     return true;
 }
 
-
 var sessionTimeData = {};
 var dateLength = 0;
 
 var forecastingData = [];
-
 
 function addOneDay(date, days) {
     var today = new Date(date);
@@ -112,7 +103,7 @@ function addOneDay(date, days) {
 function startSessionSetCheck() {
     setTimeout(
         function () {
-            console.log(Object.keys(sessionTimeData).length, dateLength);
+            // console.log(Object.keys(sessionTimeData).length, dateLength);
             if (Object.keys(sessionTimeData).length === dateLength) {
                 // order date list for graph
                 const ordered = {};
@@ -140,7 +131,7 @@ function startSessionSetCheck() {
 function startForecastingSetCheck() {
     setTimeout(
         function () {
-            console.log(forecastingData.length, 10);
+            // console.log(forecastingData.length, 10);
             if (forecastingData.length === 10) {
 
                 var num = 0;

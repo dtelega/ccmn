@@ -13,19 +13,21 @@ const imageUrl = 'https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Ca
 // for siteId
 const siteInfoUrl = 'https://cisco-presence.unit.ua/api/config/v1/sites';
 
-// function startSendRequests() {
+function startSendRequests() {
 
 //    get siteId
-sendRequest(
+    sendRequest(
         siteInfoUrl,
         password2,
         'GET',
         null,
         function (data) {
             siteid = data["0"].aesUId;
-            console.log("get siteId " + siteid);
         }
     );
+
+    startLogHistoryCheck();
+}
 
 //    request for active user count by floor
 function chartDrawFloor() {
@@ -75,9 +77,6 @@ function drawCircle(floorName, macAddress) {
         null,
         function (data) {
             $.each(data, function(key){
-
-                console.log(floorName);
-
                 if (data[key].mapInfo.mapHierarchyString.indexOf(floorName) !== -1) {
                     if (macAddress === data[key].macAddress) {
 
@@ -97,7 +96,7 @@ function drawCircle(floorName, macAddress) {
                             "<svg height='10' width='10'>"
                             + "<circle id='"+data[key].macAddress+"' cx='" + data[key].mapCoordinate.x
                             + "' cy='" + data[key].mapCoordinate.y
-                            + "' r='7' stroke-width='3' stroke='black' fill='red' onclick='findThisClient($(this).attr(\"id\"))'>"
+                            + "' r='7' stroke-width='3' stroke='black' fill='red' onclick='getClientInfo($(this).attr(\"id\"))'>"
                             + "<title>" + data[key].macAddress + "</title>"
                             + "</circle></svg>"
                         );
@@ -109,21 +108,6 @@ function drawCircle(floorName, macAddress) {
         }
     );
 
-}
-
-// draw one circle on click on map and show info for it
-function findThisClient(macAddress) {
-    if($('.img2nd_Floor').css('display') === 'none' && $('.img3rd_Floor').css('display') === 'none') {
-        console.log('1st_Floor: ' + macAddress);
-        // imageRequest('1st_Floor', macAddress);
-    } else if ($('.img1st_Floor').css('display') === 'none' && $('.img3rd_Floor').css('display') === 'none') {
-        // imageRequest('2nd_Floor', macAddress);
-        console.log('2nd_Floor: ' + macAddress);
-    } else if ($('.img1st_Floor').css('display') === 'none' && $('.img2nd_Floor').css('display') === 'none') {
-        // imageRequest('3rd_Floor', macAddress);
-        console.log('3rd_Floor: ' + macAddress);
-    }
-    getClientInfo(macAddress);
 }
 
 // get client info
@@ -138,8 +122,6 @@ function getClientInfo(macAddress) {
         'GET',
         null,
         function (data) {
-            console.log('https://cisco-cmx.unit.ua/api/location/v2/clients?macAddress='+macAddress);
-            console.log(data);
             if (data === undefined){
                 alert('MacAddress does not exist!');
                 return;
@@ -217,7 +199,7 @@ function chartDrawType() {
 
     if (!correctDate(date1, date2))
         return;
-    console.log(hourlyCountUrl);
+    // console.log(hourlyCountUrl);
 
     sendRequest(
         hourlyCountUrl,
@@ -261,15 +243,21 @@ function getOneValueVisitorsInfo() {
     var apiType = $("#apiType").val();
     var type = document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '');
 
+    // alert(type+":"+apiType);
     var date1 = null;
     var date2 = null;
+
+    if ((apiType === 'repeatvisitors/' || apiType === 'dwell/')  && type.indexOf('total') !== -1 ){
+        type = type.replace("total", "count");
+    }
+
     requestUrl += apiType + type + "?siteId="+siteid;
     if (type === "count") {
         requestUrl += "&date=";
         date1 = Math.round((new Date($("#oneValueDate").datepicker().val()).getTime()) / 1000);
         requestUrl += $("#oneValueDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
     }
-    if (type === "total") {
+    if (type === "total" ) {
         date1 = Math.round((new Date($("#oneValueStartDate").datepicker().val()).getTime()) / 1000);
         date2 = Math.round((new Date($("#oneValueEndDate").datepicker().val()).getTime()) / 1000);
 
@@ -278,9 +266,13 @@ function getOneValueVisitorsInfo() {
         requestUrl += "&endDate=";
         requestUrl += $("#oneValueEndDate").datepicker({ dateFormat: 'yy-mm-dd' }).val();
     }
+    if ((apiType === 'repeatvisitors/' || apiType === 'dwell/') && (isNaN(date1) || isNaN(date2))) {
+        alert("Sry, not available ;(");
+        return ;
+    }
     if (!correctDate(date1, date2))
         return;
-    console.log(requestUrl);
+    // console.log(requestUrl);
     sendRequest(
         requestUrl,
         password2,
@@ -330,7 +322,6 @@ function kpisummary() {
 
     requestUrl += type + "?siteId="+siteid;
     if (type === "kpisummary") {
-        console.log($("#kpi-input-date").datepicker({ dateFormat: 'yy-mm-dd' }).val());
         var date1 = null;
         var date2 = null;
         if ($("#kpi-input-date").val()) {
@@ -347,7 +338,7 @@ function kpisummary() {
             return;
     }
 
-    console.log(requestUrl);
+    // console.log(requestUrl);
     sendRequest(
         requestUrl,
         password2,
@@ -385,13 +376,13 @@ function kpisummary() {
     );
 }
 
-startLogHistoryCheck();
-
-// }
-
 function startLogHistoryCheck() {
+
     setTimeout(
         function () {
+            if (siteid === null) {
+                return ;
+            }
 
             sendRequest(
                 'https://cisco-cmx.unit.ua/api/location/v2/clients',
@@ -411,10 +402,8 @@ function startLogHistoryCheck() {
                             var currentFloor = t.mapInfo.mapHierarchyString;
                             var prevFloor = currentUsers.get(t.macAddress);
                             if (!currentUsers.has(macAddress)) {
-                                // console.log("Hi new user "+ macAddress + " on " + currentFloor);
                                 $("#log-history").append(getCurrentTime()+">Hi new user "+ macAddress + " on " + shortFloor(currentFloor)+"!\n");
                             } else if (prevFloor !== currentFloor) {
-                                // console.log("User " + macAddress + " changed floor from " + shortFloor(prevFloor) + " to " + shortFloor(currentFloor));
                                 $("#log-history").append(getCurrentTime()+">User " + macAddress + " changed floor from " + shortFloor(prevFloor) + " to " + shortFloor(currentFloor) + '\n');
                             }
                             newUsers.set(t.macAddress, t.mapInfo.mapHierarchyString);
@@ -423,7 +412,6 @@ function startLogHistoryCheck() {
 
                     for (var k of currentUsers.keys()) {
                         if (!newUsers.has(k)) {
-                            // console.log("User " + k + " has logout");
                             $("#log-history").append(getCurrentTime()+">User " + k + " has logout\n");
                         }
                     }
@@ -433,9 +421,9 @@ function startLogHistoryCheck() {
             );
             startLogHistoryCheck();
         },
-        5000
+        3000
     );
-};// todo change to 10 second
+}
 
 function getSessionDuration() {
 
@@ -463,10 +451,8 @@ function getSessionDuration() {
             'GET',
             null,
             function (data) {
-
                 sessionTimeData[date+''] = data;
-                console.log(sessionTimeData);
-
+                // console.log(sessionTimeData);
             }
         );
     });
@@ -477,12 +463,17 @@ function getForecasting() {
     var forecastingDateSet = [];
     var date = $('#forecastingDate').datepicker().val();
 
+    if (Math.round((new Date($("#forecastingDate").datepicker().val()).getTime()) / 1000)
+        <= Math.round((new Date()).getTime() / 1000)) {
+        alert("Date error");
+        return false;
+    }
     for (var days = 7; days <= 7*10; days += 7) {
         forecastingDateSet.push(addOneDay(date, -days));
     }
 
     var type = $('#forecasting-select').val().replace('\”', '').replace('\”', '');
-    console.log(type);
+    // console.log(type);
     $.each(forecastingDateSet, function (i, date) {
 
         sendRequest(
@@ -491,13 +482,27 @@ function getForecasting() {
             'GET',
             null,
             function (data) {
-
                 forecastingData.push(data);
-                console.log(forecastingData);
+                // console.log(forecastingData);
             }
         );
     });
     startForecastingSetCheck();
+}
+
+function author(pass) {
+
+    var res = null;
+    try {
+
+       res = btoa(username + ":" + pass);
+
+    } catch (err) {
+
+        return null;
+    }
+    return res;
+
 }
 
 // main func for ajax requests
@@ -509,16 +514,21 @@ function sendRequest(url, pass, type, payload, success) {
         // contentType: "image/png",
         data:payload,
         headers: {
-            "Authorization": "Basic " + btoa(username + ":" + pass)
+            "Authorization": "Basic " + author(pass)
         },
         success: success,
         error: function(){
+
             console.log('error ajax request!');
         },
         statusCode: {
+            401: function () {
+                alert('Sry ;( You are not authorized');
+            },
             404: function () {
                 alert('Sry ;( not available now');
             }
+
         }
     });
 }

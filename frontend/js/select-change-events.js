@@ -3,8 +3,6 @@
 $("#oneValueVisitors").change(function () {
     var type = document.getElementById("oneValueVisitors").value.replace('\”', '').replace('\”', '');
 
-    console.log(apiType);
-    console.log(type);
     if (type === "count") {
         $("#oneValueDate").show();
         $("#oneValueStartDate").hide();
@@ -20,7 +18,6 @@ $("#oneValueVisitors").change(function () {
         $("#oneValueStartDate").hide();
         $("#oneValueEndDate").hide();
     }
-
 });
 $("#apiType").change(function () {
     var apiType = document.getElementById("apiType").value.replace('\”', '').replace('\”', '');
@@ -59,7 +56,6 @@ $("#oneValueHourly").change(function () {
 $("#kpi-select").change(function () {
     var type = $("#kpi-select").val();
 
-    console.log("change to "+type);
     if (type === "kpisummary") {
         $("#kpi-input-date").show();
         $("#kpi-input-startDate").show();

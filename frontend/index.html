@@ -64,12 +64,12 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input id="login" class="form-control mr-sm-2 credentials" type="text" placeholder="Login"
-                   onfocusout="getLogin();startSendRequests();">
+                   onfocusout="getLogin()">
             <input id="password-cmx" class="form-control mr-sm-2 credentials" type="password" placeholder="Password cmx"
-                   onfocusout="getPasswordCmx();startSendRequests();">
+                   onfocusout="getPasswordCmx();">
             <input id="password-precense" class="form-control mr-sm-2 credentials" type="password"
-                   placeholder="Password presence" onfocusout="getPasswordPrecense();startSendRequests();">
-            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+                   placeholder="Password presence" onfocusout="getPasswordPrecense()">
+            <button class="btn btn-success my-2 my-sm-0" type="" onClick="startSendRequests();">Log-in</button>
         </form>
     </div>
 </nav>
@@ -94,7 +94,7 @@
                         <div class="row text-center">
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                                 <div class="portfolio-card">
-                                    <img src="https://cdn.intra.42.fr/users/medium_dtelega.jpg">
+                                    <img src="https://avatars0.githubusercontent.com/u/19636412?s=460&v=4">
                                     <div class="name">Dmytro Telega</div>
                                     <a href="https://www.facebook.com/dmytro.telega" class="fa fa-linkedin"></a>
                                     <a href="https://github.com/dtelega" class="fa fa-github"></a>
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                                 <div class="portfolio-card">
-                                    <img src="https://cdn.intra.42.fr/users/medium_sbondar.jpg">
+                                    <img src="https://avatars1.githubusercontent.com/u/20815107?s=400&v=4">
                                     <div class="name">Serhii Bondar</div>
                                     <a href="https://www.linkedin.com/in/sergey-bondar-335695117/" class="fa fa-linkedin"></a>
                                     <a href="https://github.com/bondars95" class="fa fa-github"></a>
@@ -260,7 +260,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="chart_div_session" style="height: 1000px"></div>
+                    <div id="chart_div_session" style="height: 900px"></div>
                 </section>
 
                 <section id="kpi" style="display: none;">

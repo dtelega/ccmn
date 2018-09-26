@@ -10,7 +10,7 @@ google.charts.load('current', {'packages':['corechart', 'bar']});
 
 // active user count
 function drawChartTotalUsers(data) {
-    console.log(data);
+    // console.log(data);
     // Create the data table.
     var chartData = new google.visualization.DataTable();
     chartData.addColumn('string', 'Floor');
@@ -39,7 +39,7 @@ function drawChartTotalUsers(data) {
 
 // analitic and presence
 function drawPresence(data, path, title, first, sec, third, fourth, fifth) {
-    console.log(data);
+    // console.log(data);
 
     // Create the data table.
     var chartData = new google.visualization.DataTable();
